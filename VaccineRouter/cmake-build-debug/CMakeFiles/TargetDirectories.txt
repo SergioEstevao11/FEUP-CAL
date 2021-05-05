@@ -1,3 +1,0 @@
-C:/Users/rodri/Desktop/FEUP/2ano/CAL/CAL-Projeto/VaccineRouter/cmake-build-debug/CMakeFiles/VaccineRouter.dir
-C:/Users/rodri/Desktop/FEUP/2ano/CAL/CAL-Projeto/VaccineRouter/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/rodri/Desktop/FEUP/2ano/CAL/CAL-Projeto/VaccineRouter/cmake-build-debug/CMakeFiles/rebuild_cache.dir
