@@ -17,11 +17,13 @@ private:
     std::unordered_map<Node*, std::unordered_set<Edge*>> adjList;
     bool nodeExists(Node * node);
     bool edgeExists(Edge * edge);
+
+    friend class Dijkstra;
 public:
     ~Graph();
+    const static double INF;
     void addNode(Node * node);
     void addEdge(Edge * edge);
-    std::unordered_set<Node*> getNodes() {return nodes;};
 
 };
 #endif //VACCINEROUTER_GRAPH_H

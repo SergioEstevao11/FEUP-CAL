@@ -6,6 +6,8 @@
 
 using namespace std;
 
+const static double Graph::INF = numeric_limits<double>;
+
 bool Graph::nodeExists(Node *node) {
     return nodes.find(node) != nodes.end();
 }
