@@ -16,10 +16,14 @@ private:
     std::unordered_map<Node *, Node *> path;
     std::unordered_map<Node*, bool> visitedForward;
     std::unordered_map<Node*, bool> visitedBackward;
+    std::unordered_map<Node *, double> heuristicForward;
+    std::unordered_map<Node *, double> heuristicBackward;
     void setup();
+    double solve();
 public:
     NodeToNode(Graph * graph);
     double dijkstra(Node * orig, Node* dest);
+    double aStar(Node * orig, Node * dest);
 };
 
 

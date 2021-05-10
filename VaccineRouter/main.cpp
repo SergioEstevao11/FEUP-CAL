@@ -17,8 +17,11 @@ int main() {
     gReader.readEdges(edgeS);
 
     NodeToAll dijk(&g);
+    NodeToAll ast(&g);
     dijk.dijkstra(g.getNode(50));
-    std::cout << "unidirected: " << dijk.dist[g.getNode(56)] << std::endl;
+    std::cout << "unidirected dijkstra: " << dijk.dist[g.getNode(56)] << std::endl;
+    ast.aStar(g.getNode(50));
+    std::cout << "unidirected aStar: " << ast.dist[g.getNode(56)] << std::endl;
 
     NodeToNode twodijk(&g);
     cout << "bidirected: " << twodijk.dijkstra(g.getNode(50), g.getNode(56)) << endl;
@@ -26,7 +29,7 @@ int main() {
 
     Kosaraju kos(&g);
     kos.run();
-    for(auto &u : kos.SCC){
+    /*for(auto &u : kos.SCC){
         cout << u.first->getId() << " - " << u.second->getId() << endl;
-    }
+    }*/
 }

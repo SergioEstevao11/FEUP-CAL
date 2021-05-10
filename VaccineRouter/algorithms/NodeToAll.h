@@ -18,12 +18,15 @@ private:
     //std::unordered_map<Node *, double> dist; USED FOR TESTING
     std::unordered_map<Node *, Node *> path;
     //std::unordered_map<Node*, bool> visited;
+    std::unordered_map<Node *, double> heuristic;
     void setup();
+    void solve(Node * node);
 public:
     NodeToAll(Graph * g);
     std::unordered_map<Node *, double> dist;
     std::unordered_map<Node*, bool> visited;
     void dijkstra(Node* node);
+    void aStar(Node* node);
 };
 
 

@@ -5,6 +5,7 @@
 #include "NodeToAll.h"
 
 #include <queue>
+#include <cmath>
 
 using namespace std;
 
@@ -22,8 +23,23 @@ void NodeToAll::setup() {
 
 void NodeToAll::dijkstra(Node *node) {
     setup();
+    for(auto &v : graph->nodes){
+        heuristic[v] = 0;
+    }
+    solve(node);
+}
+
+void NodeToAll::aStar(Node *node) {
+    setup();
+    for(auto &v : graph->nodes){
+        heuristic[v] = sqrt(pow(node->getX() - v->getX(),2) + pow(node->getY() - v->getY(),2));
+    }
+    solve(node);
+}
+
+void NodeToAll::solve(Node *node) {
     priority_queue<pair<double, Node*>> q;
-    q.push(make_pair(0, node));
+    q.push(make_pair(0 - heuristic[node], node));
     dist[node] = 0;
     path[node] = nullptr;
     while(!q.empty()){
@@ -35,7 +51,7 @@ void NodeToAll::dijkstra(Node *node) {
             double w = edge->getWeight();
             if(dist[in] > dist[out] + w){
                 dist[in] = dist[out] + w;
-                q.push({-dist[in], in});
+                q.push({-dist[in] - heuristic[in], in});
                 path[in] = out;
             }
         }
