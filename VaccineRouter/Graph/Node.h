@@ -10,6 +10,7 @@ private:
     long double x;
     long double y;
 public:
+    Node(unsigned int, double x, double y);
     unsigned int getId();
     long double getX();
     long double getY();

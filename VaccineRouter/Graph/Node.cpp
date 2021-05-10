@@ -3,6 +3,12 @@
 //
 #include "Node.h"
 
+Node::Node(unsigned int id, double x, double y) {
+    this->id = id;
+    this->x = x;
+    this->y = y;
+}
+
 unsigned int Node::getId() {
     return id;
 }
