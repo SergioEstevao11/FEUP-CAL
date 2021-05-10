@@ -10,11 +10,11 @@ class Edge{
 private:
     Node * begin;
     Node * end;
-    long double weight;
+    double weight;
 public:
     Edge(Node * begin, Node* end);
     Node * getBegin();
     Node * getEnd();
-    long double getWeight();
+    double getWeight();
 };
 #endif //VACCINEROUTER_EDGE_H

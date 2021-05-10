@@ -24,10 +24,8 @@ void Dijkstra::run(Node *node) {
     setup();
     priority_queue<pair<double, Node*>> q;
     q.push(make_pair(0, node));
-
     dist[node] = 0;
     path[node] = nullptr;
-
     while(!q.empty()){
         Node * out = q.top().second; q.pop();
         if(visited[out]) continue;

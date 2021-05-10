@@ -16,6 +16,6 @@ Node * Edge::getBegin(){
 Node * Edge::getEnd(){
     return end;
 }
-long double Edge::getWeight(){
+double Edge::getWeight(){
     return weight;
 }

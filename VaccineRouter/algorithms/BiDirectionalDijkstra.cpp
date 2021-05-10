@@ -39,7 +39,6 @@ double BiDirectionalDijkstra::run(Node *orig, Node *dest) {
     while(!(qf.empty() || qb.empty())){
         Node * nf = qf.top().second; qf.pop();
         Node * nb = qb.top().second; qb.pop();
-
         if(distForward[nf] + distBackward[nb] >= minDist){
             return minDist;
         }
@@ -61,8 +60,8 @@ double BiDirectionalDijkstra::run(Node *orig, Node *dest) {
             for(auto & edge : graph->predAdjList[nb]){
                 Node * pr = edge->getBegin();
                 double w = edge->getWeight();
-                if(distBackward[pr] > distBackward[nf] + w){
-                    distBackward[pr] = distBackward[nf] + w;
+                if(distBackward[pr] > distBackward[nb] + w){
+                    distBackward[pr] = distBackward[nb] + w;
                     qb.push({-distBackward[pr], pr});
                     path[nb] = pr;
                 }

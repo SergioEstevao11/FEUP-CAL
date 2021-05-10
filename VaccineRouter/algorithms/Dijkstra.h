@@ -15,12 +15,14 @@
 class Dijkstra {
 private:
     Graph * graph;
-    std::unordered_map<Node *, double> dist;
+    //std::unordered_map<Node *, double> dist;
     std::unordered_map<Node *, Node *> path;
-    std::unordered_map<Node*, bool> visited;
+    //std::unordered_map<Node*, bool> visited;
     void setup();
 public:
     Dijkstra(Graph * g);
+    std::unordered_map<Node *, double> dist;
+    std::unordered_map<Node*, bool> visited;
     void run(Node* node);
 };
 
