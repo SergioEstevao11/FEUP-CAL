@@ -3,10 +3,11 @@
 //
 #include "Graph.h"
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
-const static double Graph::INF = numeric_limits<double>;
+const double Graph::INF = numeric_limits<double>::max();
 
 bool Graph::nodeExists(Node *node) {
     return nodes.find(node) != nodes.end();
@@ -43,7 +44,9 @@ void Graph::addEdge(Edge *edge) {
     if(edgeExists(edge)){
         cout << "Invalid Edge";
     }
+
     adjList[edge->getBegin()].insert(edge);
+    predAdjList[edge->getEnd()].insert(edge);
 }
 
 

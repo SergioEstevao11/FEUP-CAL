@@ -15,10 +15,12 @@ class Graph{
 private:
     std::unordered_set<Node*> nodes;
     std::unordered_map<Node*, std::unordered_set<Edge*>> adjList;
+    std::unordered_map<Node*, std::unordered_set<Edge*>> predAdjList;
     bool nodeExists(Node * node);
     bool edgeExists(Edge * edge);
 
     friend class Dijkstra;
+    friend class BiDirectionalDijkstra;
 public:
     ~Graph();
     const static double INF;
