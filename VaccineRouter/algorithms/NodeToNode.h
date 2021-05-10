@@ -2,13 +2,13 @@
 // Created by rodrigo on 10/05/2021.
 //
 
-#ifndef VACCINEROUTER_BIDIRECTIONALDIJKSTRA_H
-#define VACCINEROUTER_BIDIRECTIONALDIJKSTRA_H
+#ifndef VACCINEROUTER_NODETONODE_H
+#define VACCINEROUTER_NODETONODE_H
 
 
 #include "../graph/Graph.h"
 
-class BiDirectionalDijkstra {
+class NodeToNode {
 private:
     Graph * graph;
     std::unordered_map<Node *, double> distForward;
@@ -18,9 +18,9 @@ private:
     std::unordered_map<Node*, bool> visitedBackward;
     void setup();
 public:
-    BiDirectionalDijkstra(Graph * graph);
-    double run(Node * orig, Node* dest);
+    NodeToNode(Graph * graph);
+    double dijkstra(Node * orig, Node* dest);
 };
 
 
-#endif //VACCINEROUTER_BIDIRECTIONALDIJKSTRA_H
+#endif //VACCINEROUTER_NODETONODE_H

@@ -2,17 +2,17 @@
 // Created by rodrigo on 10/05/2021.
 //
 
-#include "Dijkstra.h"
+#include "NodeToAll.h"
 
 #include <queue>
 
 using namespace std;
 
-Dijkstra::Dijkstra(Graph *graph) {
+NodeToAll::NodeToAll(Graph *graph) {
     this->graph = graph;
 }
 
-void Dijkstra::setup() {
+void NodeToAll::setup() {
     for(auto &node : graph->nodes){
         dist[node] = Graph::INF;
         visited[node] = false;
@@ -20,7 +20,7 @@ void Dijkstra::setup() {
     }
 }
 
-void Dijkstra::run(Node *node) {
+void NodeToAll::dijkstra(Node *node) {
     setup();
     priority_queue<pair<double, Node*>> q;
     q.push(make_pair(0, node));

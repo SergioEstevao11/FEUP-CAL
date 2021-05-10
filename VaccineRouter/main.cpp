@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "Graph/GraphReader.h"
-#include "algorithms/Dijkstra.h"
-#include "algorithms/BiDirectionalDijkstra.h"
+#include "algorithms/NodeToAll.h"
+#include "algorithms/NodeToNode.h"
 #include "algorithms/Kosaraju.h"
 
 using namespace std;
@@ -16,13 +16,13 @@ int main() {
     gReader.readNodes(nodeS);
     gReader.readEdges(edgeS);
 
-    Dijkstra dijk(&g);
-    dijk.run(g.getNode(50));
+    NodeToAll dijk(&g);
+    dijk.dijkstra(g.getNode(50));
     std::cout << "unidirected: " << dijk.dist[g.getNode(56)] << std::endl;
 
-    BiDirectionalDijkstra twodijk(&g);
-    cout << "bidirected: " << twodijk.run(g.getNode(50), g.getNode(56)) << endl;
-    cout << "bidirected: " << twodijk.run(g.getNode(56), g.getNode(50)) << endl;
+    NodeToNode twodijk(&g);
+    cout << "bidirected: " << twodijk.dijkstra(g.getNode(50), g.getNode(56)) << endl;
+    cout << "bidirected: " << twodijk.dijkstra(g.getNode(56), g.getNode(50)) << endl;
 
     Kosaraju kos(&g);
     kos.run();

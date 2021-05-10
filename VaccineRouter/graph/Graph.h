@@ -20,8 +20,8 @@ private:
     bool nodeExists(Node * node);
     bool edgeExists(Edge * edge);
 
-    friend class Dijkstra;
-    friend class BiDirectionalDijkstra;
+    friend class NodeToAll;
+    friend class NodeToNode;
     friend class Kosaraju;
 public:
     ~Graph();

@@ -2,8 +2,8 @@
 // Created by rodrigo on 10/05/2021.
 //
 
-#ifndef VACCINEROUTER_DIJKSTRA_H
-#define VACCINEROUTER_DIJKSTRA_H
+#ifndef VACCINEROUTER_NODETOALL_H
+#define VACCINEROUTER_NODETOALL_H
 
 
 #include <queue>
@@ -12,7 +12,7 @@
 #include <unordered_map>
 #include <queue>
 
-class Dijkstra {
+class NodeToAll {
 private:
     Graph * graph;
     //std::unordered_map<Node *, double> dist; USED FOR TESTING
@@ -20,11 +20,11 @@ private:
     //std::unordered_map<Node*, bool> visited;
     void setup();
 public:
-    Dijkstra(Graph * g);
+    NodeToAll(Graph * g);
     std::unordered_map<Node *, double> dist;
     std::unordered_map<Node*, bool> visited;
-    void run(Node* node);
+    void dijkstra(Node* node);
 };
 
 
-#endif //VACCINEROUTER_DIJKSTRA_H
+#endif //VACCINEROUTER_NODETOALL_H

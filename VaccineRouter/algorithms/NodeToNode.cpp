@@ -2,17 +2,17 @@
 // Created by rodrigo on 10/05/2021.
 //
 
-#include "BiDirectionalDijkstra.h"
+#include "NodeToNode.h"
 
 #include <queue>
 
 using namespace std;
 
-BiDirectionalDijkstra::BiDirectionalDijkstra(Graph *graph) {
+NodeToNode::NodeToNode(Graph *graph) {
     this->graph = graph;
 }
 
-void BiDirectionalDijkstra::setup() {
+void NodeToNode::setup() {
     for(auto &node : graph->nodes){
         distForward[node] = Graph::INF;
         distBackward[node] = Graph::INF;
@@ -22,7 +22,7 @@ void BiDirectionalDijkstra::setup() {
     }
 }
 
-double BiDirectionalDijkstra::run(Node *orig, Node *dest) {
+double NodeToNode::dijkstra(Node *orig, Node *dest) {
     setup();
     priority_queue<pair<double, Node*>> qf;
     qf.push(make_pair(0, orig));
