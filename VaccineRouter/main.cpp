@@ -10,15 +10,16 @@ int main() {
     Graph g;
     GraphReader gReader(&g);
 
-    std::string nodeS = "../maps/porto_full_nodes_xy.txt";
-    std::string edgeS = "../maps/porto_full_edges.txt";
+    std::string nodeS = "../maps/porto_strong_nodes_xy.txt";
+    std::string edgeS = "../maps/porto_strong_edges.txt";
     gReader.readNodes(nodeS);
     gReader.readEdges(edgeS);
 
     Dijkstra dijk(&g);
-    dijk.run(g.getNode(1));
-    std::cout << "unidirected: " << dijk.dist[g.getNode(9)] << std::endl;
+    dijk.run(g.getNode(50));
+    std::cout << "unidirected: " << dijk.dist[g.getNode(56)] << std::endl;
 
     BiDirectionalDijkstra twodijk(&g);
-    cout << "bidirected: " << twodijk.run(g.getNode(1), g.getNode(9)) << endl;
+    cout << "bidirected: " << twodijk.run(g.getNode(50), g.getNode(56)) << endl;
+    cout << "bidirected: " << twodijk.run(g.getNode(56), g.getNode(50)) << endl;
 }

@@ -37,7 +37,6 @@ void GraphReader::readNodes(std::string &filename){
                 >> dum >> y;
 
             Node * node = new Node(id,x, y);
-            nodes[id] = node;
 
             graph->addNode(node);
         }
@@ -64,7 +63,7 @@ void GraphReader::readEdges(std::string &filename){
             iss >> dum >> idOut
                 >> dum >> idIn;
 
-            Edge * edge = new Edge(nodes[idOut], nodes[idIn]);
+            Edge * edge = new Edge(graph->getNode(idOut), graph->getNode(idIn));
             graph->addEdge(edge);
         }
 

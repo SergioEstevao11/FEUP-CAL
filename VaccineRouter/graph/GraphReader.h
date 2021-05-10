@@ -11,7 +11,6 @@
 
 class GraphReader {
 private:
-    std::unordered_map<unsigned int, Node*> nodes;
     Graph * graph;
 public:
     GraphReader(Graph * graph);
