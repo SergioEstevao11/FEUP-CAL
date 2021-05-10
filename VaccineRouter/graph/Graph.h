@@ -22,6 +22,7 @@ private:
 
     friend class Dijkstra;
     friend class BiDirectionalDijkstra;
+    friend class Kosaraju;
 public:
     ~Graph();
     const static double INF;

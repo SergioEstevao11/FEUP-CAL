@@ -3,6 +3,7 @@
 #include "Graph/GraphReader.h"
 #include "algorithms/Dijkstra.h"
 #include "algorithms/BiDirectionalDijkstra.h"
+#include "algorithms/Kosaraju.h"
 
 using namespace std;
 
@@ -22,4 +23,10 @@ int main() {
     BiDirectionalDijkstra twodijk(&g);
     cout << "bidirected: " << twodijk.run(g.getNode(50), g.getNode(56)) << endl;
     cout << "bidirected: " << twodijk.run(g.getNode(56), g.getNode(50)) << endl;
+
+    Kosaraju kos(&g);
+    kos.run();
+    for(auto &u : kos.SCC){
+        cout << u.first->getId() << " - " << u.second->getId() << endl;
+    }
 }
