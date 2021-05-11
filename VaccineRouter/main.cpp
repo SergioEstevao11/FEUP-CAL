@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Graph/GraphReader.h"
+#include "graph/GraphReader.h"
 #include "algorithms/Dijkstra.h"
 #include "algorithms/BiDijkstra.h"
 #include "algorithms/Kosaraju.h"
@@ -27,7 +27,7 @@ int main() {
     std::cout << "unidirected aStar: " << ast.dist[g.getNode(56)] << std::endl;*/
 
     BiDijkstra twodijk(&g);
-    BiAStar as(&g);
+    AStar as(&g);
     int i = 0;
     int j = 0;
     for(auto & u : g.nodes){

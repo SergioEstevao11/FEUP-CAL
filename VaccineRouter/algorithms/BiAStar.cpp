@@ -5,6 +5,7 @@
 #include "BiAStar.h"
 
 #include <queue>
+#include <cmath>
 
 using namespace std;
 
@@ -13,14 +14,20 @@ BiAStar::BiAStar(Graph *graph) {
 }
 
 void BiAStar::setup(Node * orig, Node * dest) {
+    double uX = dest->getX() - orig->getX();
+    double uY = dest->getY() - orig->getY();
+    double sTot = sqrt(uX*uX + uY*uY);
     for(auto &node : graph->nodes){
         distForward[node] = Graph::INF;
         distBackward[node] = Graph::INF;
         visitedForward[node] = false;
         visitedBackward[node] = false;
         path[node] = nullptr;
-        heuristicForward[node] = dest->dist(node);
-        heuristicBackward[node] = orig->dist(node);
+        double vX = node->getX() - orig->getX();
+        double vY = node->getY() - orig->getY();
+        double dist = (uX*vX + uY*vY)/sqrt(vX*vX + vY*vY);
+        heuristicForward[node] = sTot - dist;
+        heuristicBackward[node] = dist;
     }
 }
 
