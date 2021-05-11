@@ -1,10 +1,11 @@
 #include <iostream>
 
 #include "Graph/GraphReader.h"
-#include "algorithms/NodeToAll.h"
-#include "algorithms/NodeToNode.h"
+#include "algorithms/Dijkstra.h"
+#include "algorithms/BiDijkstra.h"
 #include "algorithms/Kosaraju.h"
 #include "algorithms/Tarjan.h"
+#include "algorithms/AStar.h"
 
 using namespace std;
 
@@ -12,23 +13,39 @@ int main() {
     Graph g;
     GraphReader gReader(&g);
 
-    std::string nodeS = "../maps/porto_full_nodes_xy.txt";
-    std::string edgeS = "../maps/porto_full_edges.txt";
+    std::string nodeS = "../maps/porto_strong_nodes_xy.txt";
+    std::string edgeS = "../maps/porto_strong_edges.txt";
     gReader.readNodes(nodeS);
     gReader.readEdges(edgeS);
 
-    /*NodeToAll dijk(&g);
-    NodeToAll ast(&g);
+    /*Dijkstra dijk(&g);
+    Dijkstra ast(&g);
     dijk.dijkstra(g.getNode(50));
     std::cout << "unidirected dijkstra: " << dijk.dist[g.getNode(56)] << std::endl;
     ast.aStar(g.getNode(50));
-    std::cout << "unidirected aStar: " << ast.dist[g.getNode(56)] << std::endl;
+    std::cout << "unidirected aStar: " << ast.dist[g.getNode(56)] << std::endl;*/
 
-    NodeToNode twodijk(&g);
-    cout << "bidirected: " << twodijk.dijkstra(g.getNode(50), g.getNode(56)) << endl;
-    cout << "bidirected: " << twodijk.dijkstra(g.getNode(56), g.getNode(50)) << endl;*/
+    BiDijkstra twodijk(&g);
+    AStar as(&g);
+    int i = 0;
+    int j = 0;
+    for(auto & u : g.nodes){
+        j++;
+        if(j == 100) break;
+        for(auto & v : g.nodes){
+            i++;
+            if(i == j*100) break;
+            if(abs(twodijk.run(u,v) - as.run(u,v)) > 1e-5){
+                cout << "DIFF" << endl;
+                cout << u->getId() << " " << v->getId() << endl;
+                cout << twodijk.run(u,v) << " " << endl;
+            }
+        }
+    }
 
-    Kosaraju kos(&g);
+    cout << i << endl;
+
+    /*Kosaraju kos(&g);
     kos.run();
     Tarjan tar(&g);
     tar.run();
@@ -38,5 +55,5 @@ int main() {
             cout << "DIFF\n";
         }
             //cout << u.first->getId() << " - " << u.second->getId() << endl;
-    }
+    }*/
 }

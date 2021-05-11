@@ -14,17 +14,19 @@
 class Graph{
 private:
     std::unordered_map<unsigned int, Node*> nodeMap;
-    std::unordered_set<Node*> nodes;
+    //std::unordered_set<Node*> nodes;
     std::unordered_map<Node*, std::unordered_set<Edge*>> adjList;
     std::unordered_map<Node*, std::unordered_set<Edge*>> predAdjList;
     bool nodeExists(Node * node);
     bool edgeExists(Edge * edge);
 
-    friend class NodeToAll;
-    friend class NodeToNode;
+    friend class AStar;
+    friend class Dijkstra;
+    friend class BiDijkstra;
     friend class Kosaraju;
     friend class Tarjan;
 public:
+    std::unordered_set<Node*> nodes;
     ~Graph();
     const static double INF;
     void addNode(Node * node);

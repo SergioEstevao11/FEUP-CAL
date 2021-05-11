@@ -2,18 +2,17 @@
 // Created by rodrigo on 10/05/2021.
 //
 
-#include "NodeToAll.h"
+#include "Dijkstra.h"
 
 #include <queue>
-#include <cmath>
 
 using namespace std;
 
-NodeToAll::NodeToAll(Graph *graph) {
+Dijkstra::Dijkstra(Graph *graph) {
     this->graph = graph;
 }
 
-void NodeToAll::setup() {
+void Dijkstra::setup() {
     for(auto &node : graph->nodes){
         dist[node] = Graph::INF;
         visited[node] = false;
@@ -21,25 +20,10 @@ void NodeToAll::setup() {
     }
 }
 
-void NodeToAll::dijkstra(Node *node) {
+void Dijkstra::run(Node *node) {
     setup();
-    for(auto &v : graph->nodes){
-        heuristic[v] = 0;
-    }
-    solve(node);
-}
-
-void NodeToAll::aStar(Node *node) {
-    setup();
-    for(auto &v : graph->nodes){
-        heuristic[v] = sqrt(pow(node->getX() - v->getX(),2) + pow(node->getY() - v->getY(),2));
-    }
-    solve(node);
-}
-
-void NodeToAll::solve(Node *node) {
     priority_queue<pair<double, Node*>> q;
-    q.push(make_pair(0 - heuristic[node], node));
+    q.push(make_pair(0, node));
     dist[node] = 0;
     path[node] = nullptr;
     while(!q.empty()){
@@ -51,7 +35,7 @@ void NodeToAll::solve(Node *node) {
             double w = edge->getWeight();
             if(dist[in] > dist[out] + w){
                 dist[in] = dist[out] + w;
-                q.push({-dist[in] - heuristic[in], in});
+                q.push({-dist[in], in});
                 path[in] = out;
             }
         }

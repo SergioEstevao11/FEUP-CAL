@@ -2,17 +2,17 @@
 // Created by rodrigo on 10/05/2021.
 //
 
-#include "NodeToNode.h"
+#include "BiDijkstra.h"
 
 #include <queue>
 
 using namespace std;
 
-NodeToNode::NodeToNode(Graph *graph) {
+BiDijkstra::BiDijkstra(Graph *graph) {
     this->graph = graph;
 }
 
-void NodeToNode::setup() {
+void BiDijkstra::setup() {
     for(auto &node : graph->nodes){
         distForward[node] = Graph::INF;
         distBackward[node] = Graph::INF;
@@ -22,7 +22,7 @@ void NodeToNode::setup() {
     }
 }
 
-double NodeToNode::dijkstra(Node *orig, Node *dest) {
+double BiDijkstra::run(Node *orig, Node *dest) {
     setup();
     priority_queue<pair<double, Node*>> qf;
     qf.push(make_pair(0, orig));
