@@ -23,6 +23,7 @@ private:
     friend class NodeToAll;
     friend class NodeToNode;
     friend class Kosaraju;
+    friend class Tarjan;
 public:
     ~Graph();
     const static double INF;
