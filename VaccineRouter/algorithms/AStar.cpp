@@ -5,7 +5,6 @@
 #include "AStar.h"
 
 #include <queue>
-#include <cmath>
 
 using namespace std;
 
@@ -18,7 +17,7 @@ void AStar::setup(Node * dest) {
         dist[node] = Graph::INF;
         visited[node] = false;
         path[node] = nullptr;
-        heuristic[node] = sqrt(pow(node->getX() - dest->getX(),2) + pow(node->getY() - dest->getY(),2));
+        heuristic[node] = dest->dist(node);
     }
 }
 

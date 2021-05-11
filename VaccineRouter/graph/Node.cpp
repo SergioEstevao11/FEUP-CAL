@@ -3,6 +3,8 @@
 //
 #include "Node.h"
 
+#include <cmath>
+
 Node::Node(unsigned int id, double x, double y) {
     this->id = id;
     this->x = x;
@@ -13,10 +15,14 @@ unsigned int Node::getId() {
     return id;
 }
 
-long double Node::getX(){
+double Node::getX(){
     return x;
 }
 
-long double Node::getY(){
+double Node::getY(){
     return y;
+}
+
+double Node::dist(Node *node) {
+    return sqrt(pow(x - node->getX(),2) + pow(y - node->getY(),2));
 }

@@ -21,6 +21,7 @@ private:
     bool edgeExists(Edge * edge);
 
     friend class AStar;
+    friend class BiAStar;
     friend class Dijkstra;
     friend class BiDijkstra;
     friend class Kosaraju;

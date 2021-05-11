@@ -7,12 +7,13 @@
 class Node{
 private:
     unsigned int id;
-    long double x;
-    long double y;
+    double x;
+    double y;
 public:
     Node(unsigned int, double x, double y);
     unsigned int getId();
-    long double getX();
-    long double getY();
+    double getX();
+    double getY();
+    double dist(Node * node);
 };
 #endif //VACCINEROUTER_NODE_H
