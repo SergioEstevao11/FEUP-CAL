@@ -17,8 +17,8 @@ GraphDisplayer::GraphDisplayer(Graph *graph) {
 
 void GraphDisplayer::display() {
     GraphViewer gv;
-    gv.setScale(1.0/4000.0);
-    gv.setCenter(sf::Vector2f(0, 0));
+    gv.setScale(7.5);
+    gv.setCenter(sf::Vector2f(2500, 0));
 
     for(auto &v : graph->getNodes()){
         gvNode &node = gv.addNode(v->getId(), sf::Vector2f(v->getX(), v->getY()));
@@ -29,7 +29,6 @@ void GraphDisplayer::display() {
         gvEdge &edge = gv.addEdge(e.first, gv.getNode(e.second->getBegin()->getId()), gv.getNode(e.second->getEnd()->getId()));
         edge.setThickness(1);
         edge.setColor(GraphViewer::BLACK);
-        cout << e.first << endl;
     }
 
     gv.setEnabledNodes(true); // Disable node drawing

@@ -25,9 +25,9 @@ int main() {
     std::cout << "unidirected dijkstra: " << dijk.dist[g.getNode(56)] << std::endl;
     ast.aStar(g.getNode(50));
     std::cout << "unidirected aStar: " << ast.dist[g.getNode(56)] << std::endl;*/
-    /*GraphDisplayer gd(&g);
-    gd.display();*/
-    BiDijkstra twodijk(&g);
+    GraphDisplayer gd(&g);
+    gd.display();
+    /*BiDijkstra twodijk(&g);
     AStar as(&g);
     int i = 0;
     int j = 0;
