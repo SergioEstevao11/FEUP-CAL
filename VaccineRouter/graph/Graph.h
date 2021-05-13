@@ -13,7 +13,9 @@
 
 class Graph{
 private:
+    unsigned int edgeCounter;
     std::unordered_map<unsigned int, Node*> nodeMap;
+    std::unordered_map<unsigned int, Edge*> edgeMap;
     //std::unordered_set<Node*> nodes;
     std::unordered_map<Node*, std::unordered_set<Edge*>> adjList;
     std::unordered_map<Node*, std::unordered_set<Edge*>> predAdjList;
@@ -26,13 +28,19 @@ private:
     friend class BiDijkstra;
     friend class Kosaraju;
     friend class Tarjan;
+
+    //friend class GraphDisplayer;
 public:
+    Graph();
     std::unordered_set<Node*> nodes;
     ~Graph();
     const static double INF;
     void addNode(Node * node);
     void addEdge(Edge * edge);
     Node * getNode(unsigned int id);
+
+    std::unordered_set<Node*> getNodes() {return nodes;};
+    std::unordered_map<unsigned int, Edge*> getEdges() {return edgeMap;};
 
     //ONLY FOR TESTING
     unsigned numNodes() { return nodes.size();};

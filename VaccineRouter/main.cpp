@@ -6,7 +6,7 @@
 #include "algorithms/Kosaraju.h"
 #include "algorithms/Tarjan.h"
 #include "algorithms/AStar.h"
-#include "algorithms/BiAStar.h"
+#include "GraphDisplayer.h"
 
 using namespace std;
 
@@ -14,8 +14,8 @@ int main() {
     Graph g;
     GraphReader gReader(&g);
 
-    std::string nodeS = "../maps/porto_strong_nodes_xy.txt";
-    std::string edgeS = "../maps/porto_strong_edges.txt";
+    std::string nodeS = "../maps/porto_full_nodes_xy.txt";
+    std::string edgeS = "../maps/porto_full_edges.txt";
     gReader.readNodes(nodeS);
     gReader.readEdges(edgeS);
 
@@ -25,7 +25,8 @@ int main() {
     std::cout << "unidirected dijkstra: " << dijk.dist[g.getNode(56)] << std::endl;
     ast.aStar(g.getNode(50));
     std::cout << "unidirected aStar: " << ast.dist[g.getNode(56)] << std::endl;*/
-
+    /*GraphDisplayer gd(&g);
+    gd.display();*/
     BiDijkstra twodijk(&g);
     AStar as(&g);
     int i = 0;

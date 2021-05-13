@@ -12,23 +12,25 @@
 
 #include "../graph/Node.h"
 
+struct Saving{
+    double save;
+    Node * from;
+    Node * to;
+};
+
+bool cmp(Saving s1, Saving s2);
+
 class ClarkeWright {
 private:
-    struct Saving{
-        double save;
-        Node * from;
-        Node * to;
-    };
     Node * depot;
     std::unordered_map<Node *,double> order;
     std::unordered_map<Node *, std::unordered_map<Node*,double>> costFunction;
     std::vector<Saving> savings;
     double maxT;
     double maxQ;
-    bool cmp(Saving s1, Saving s2);
     void sortSavings();
     void calculateSavings();
-
+    //rotas conjuntos de pontos ordenados?
 public:
     void run();
 };

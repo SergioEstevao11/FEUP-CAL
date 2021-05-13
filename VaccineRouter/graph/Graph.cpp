@@ -8,6 +8,10 @@ using namespace std;
 
 const double Graph::INF = 10e7;
 
+Graph::Graph() {
+    edgeCounter = 0;
+}
+
 bool Graph::nodeExists(Node *node) {
     return nodes.find(node) != nodes.end();
 }
@@ -46,6 +50,7 @@ void Graph::addEdge(Edge *edge) {
 
     adjList[edge->getBegin()].insert(edge);
     predAdjList[edge->getEnd()].insert(edge);
+    edgeMap[edgeCounter++] = edge;
 }
 
 Node *Graph::getNode(unsigned int id) {

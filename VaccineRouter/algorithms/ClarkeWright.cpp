@@ -9,10 +9,10 @@
 using namespace std;
 
 void ClarkeWright::sortSavings() {
-  sort(savings.begin(), savings.end());
+  sort(savings.begin(), savings.end(), cmp);
 }
 
-bool ClarkeWright::cmp(ClarkeWright::Saving s1, ClarkeWright::Saving s2) {
+bool cmp(Saving s1, Saving s2) {
     return s1.save > s2.save;
 }
 
