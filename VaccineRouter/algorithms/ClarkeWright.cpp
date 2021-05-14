@@ -55,11 +55,18 @@ void ClarkeWright::run() {
                 for(auto & v : updatedNodes){
                     routes[v] = from;
                 }
+                delete to;
             }
         }
     }
 
     for(auto & v : routes){
         finalRoutes.insert(v.second);
+    }
+}
+
+ClarkeWright::~ClarkeWright() {
+    for(auto &r : finalRoutes){
+        delete r;
     }
 }

@@ -35,6 +35,7 @@ private:
     void calculateSavings();
     void makeInitialRoutes();
 public:
+    ~ClarkeWright();
     void run();
 };
 
