@@ -23,7 +23,8 @@ void GraphDisplayer::display() {
     for(auto &v : graph->getNodes()){
         gvNode &node = gv.addNode(v->getId(), sf::Vector2f(v->getX(), v->getY()));
         node.setOutlineThickness(0.0);
-        node.setSize(0.0);
+        node.setSize(5.0);
+        node.setColor(GraphViewer::RED);
     }
     for(auto &e : graph->getEdges()){
         gvEdge &edge = gv.addEdge(e.first, gv.getNode(e.second->getBegin()->getId()), gv.getNode(e.second->getEnd()->getId()));

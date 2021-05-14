@@ -31,3 +31,35 @@ void ClarkeWright::calculateSavings() {
     }
 
 }
+
+void ClarkeWright::makeInitialRoutes() {
+    for(auto & v : order){
+        double weight = costFunction[depot][v.first] + costFunction[v.first][depot];
+        Route * route = new Route(v.first, weight, v.second, maxT, maxQ);
+        routes[v.first] = route;
+    }
+}
+
+void ClarkeWright::run() {
+    makeInitialRoutes();
+    calculateSavings();
+    sortSavings();
+    for(auto & save : savings){
+        if(save.save < 0) break;
+        Route * from = routes[save.from];
+        Route * to = routes[save.to];
+        if(from == to) continue;
+        if(from->isFirstNode(save.from) && to->isLastNode(save.to)){
+            if(from->addRoute(to, save.save)){
+                std::vector<Node*> updatedNodes = to->getNodes();
+                for(auto & v : updatedNodes){
+                    routes[v] = from;
+                }
+            }
+        }
+    }
+
+    for(auto & v : routes){
+        finalRoutes.insert(v.second);
+    }
+}

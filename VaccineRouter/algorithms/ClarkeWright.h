@@ -11,6 +11,7 @@
 #include <vector>
 
 #include "../graph/Node.h"
+#include "Route.h"
 
 struct Saving{
     double save;
@@ -26,11 +27,13 @@ private:
     std::unordered_map<Node *,double> order;
     std::unordered_map<Node *, std::unordered_map<Node*,double>> costFunction;
     std::vector<Saving> savings;
+    std::unordered_map<Node*, Route*> routes; //parvo mas funciona
+    std::unordered_set<Route*> finalRoutes;
     double maxT;
     double maxQ;
     void sortSavings();
     void calculateSavings();
-    //rotas conjuntos de pontos ordenados?
+    void makeInitialRoutes();
 public:
     void run();
 };
