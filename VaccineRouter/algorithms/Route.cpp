@@ -25,6 +25,9 @@ bool Route::addRoute(Route *route, double saving) {
     if(route->getCapacity() + capacity > maxCapacity) return false;
 
     nodes.insert(nodes.end(), route->getNodes().begin(), route->getNodes().end());
+    capacity += route->getCapacity();
+    weight  = route->getWeight() + weight - saving;
+    return true;
 }
 
 double Route::getCapacity() {
