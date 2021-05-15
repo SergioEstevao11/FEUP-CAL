@@ -5,7 +5,6 @@
 #include <iostream>
 #include "graphviewer.h"
 #include "GraphDisplayer.h"
-#include "lib/GraphViewerCpp/SFML/include/SFML/System.hpp"
 
 using namespace std;
 using gvNode = GraphViewer::Node;
@@ -26,6 +25,7 @@ void GraphDisplayer::display() {
         node.setSize(5.0);
         node.setColor(GraphViewer::RED);
     }
+
     for(auto &e : graph->getEdges()){
         gvEdge &edge = gv.addEdge(e.first, gv.getNode(e.second->getBegin()->getId()), gv.getNode(e.second->getEnd()->getId()));
         edge.setThickness(1);
