@@ -10,11 +10,11 @@ using namespace std;
 class menuInterface {
 
 private:
-    GraphDisplayer graph;
+    GraphDisplayer *graphD;
 
 public:
 
-    menuInterface(GraphDisplayer gd);
+    menuInterface(GraphDisplayer *gd);
 
     void showMap();
     void drawTitle();

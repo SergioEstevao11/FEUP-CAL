@@ -27,7 +27,10 @@ int main() {
     ast.aStar(g.getNode(50));
     std::cout << "unidirected aStar: " << ast.dist[g.getNode(56)] << std::endl;*/
     GraphDisplayer gd(&g);
-    menuInterface menu(gd);
+
+    //gd.SetDefaultColor();
+
+    menuInterface menu(&gd);
     menu.mainMenuHandler();
     //gd.display();
     /*BiDijkstra twodijk(&g);

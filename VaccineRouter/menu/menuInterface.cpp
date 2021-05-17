@@ -1,7 +1,7 @@
 #include "menuInterface.h"
 
 
-menuInterface::menuInterface(GraphDisplayer graph) : graph(graph){}
+menuInterface::menuInterface(GraphDisplayer *gd) : graphD(gd) {}
 
 
 void menuInterface::mainMenuHandler() {
@@ -66,5 +66,5 @@ int menuInterface::userChoice(){
 
 
 void menuInterface::showMap(){
-    graph.display();
+    graphD->display();
 }
