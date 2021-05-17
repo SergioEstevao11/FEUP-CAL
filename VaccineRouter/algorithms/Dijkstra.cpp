@@ -42,12 +42,15 @@ void Dijkstra::run(Node *node) {
     }
 }
 
-std::vector<Edge *> Dijkstra::getPath(Node *source, Node *dest) {
+double Dijkstra::getPath(Node *source, Node *dest, vector<Edge *> &retPath) {
     vector<Edge *> edgePath;
+    double dist = 0;
     Node * it = dest;
     while(path[it] != nullptr){
         edgePath.push_back(path[it]);
+        dist += path[it]->getWeight();
         it = path[it]->getBegin();
     }
-    return edgePath;
+    retPath = edgePath;
+    return dist;
 }

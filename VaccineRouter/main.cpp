@@ -10,6 +10,9 @@
 #include "menu/menuInterface.h"
 #include "POI.h"
 
+#include <chrono>
+typedef std::chrono::high_resolution_clock hrc;
+
 using namespace std;
 
 int main() {
@@ -24,12 +27,17 @@ int main() {
     POI poi(&g);
     poi.readDepots("../maps/depots.txt");
     poi.readClients("../maps/clients.txt");
-    poi.associate();
-
-    GraphDisplayer gd(&g);
+    auto start_time = hrc::now();
+    /*poi.associate();
+    poi.calculateCostFunctions();
+    auto start_time = hrc::now();*/
+    poi.preProcess();
+    auto end_time = hrc::now();
+    cout << std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count() << endl;
+    /*GraphDisplayer gd(&g);
     gd.highlightPOI(poi.getClients(), poi.getDepots());
-    gd.display();
-    //poi.printteste();
+    gd.display();*/
+    poi.printteste();
     /*Dijkstra dijk(&g);
     Dijkstra ast(&g);
     dijk.dijkstra(g.getNode(50));

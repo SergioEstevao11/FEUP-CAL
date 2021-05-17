@@ -24,7 +24,7 @@ public:
     Dijkstra(Graph * g);
     std::unordered_map<Node *, double> dist;
     void run(Node* node);
-    std::vector<Edge *> getPath(Node * source, Node * dist);
+    double getPath(Node * source, Node * dist, std::vector<Edge *> &retPath);
 };
 
 

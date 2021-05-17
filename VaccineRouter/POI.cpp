@@ -69,24 +69,23 @@ void POI::readClients(string filename) {
 }
 
 void POI::associate() {
-    BiDijkstra bi(graph);
-    for(auto &c : clients){
-        Node * depot;
-        Node * client = c.first;
+    for(auto & c : clients) {
+        Node *client = c.first;
+        Node *depot;
         double minDistfront = Graph::INF;
         double minDistback = Graph::INF;
-        vector<Edge*> minPathfront;
-        vector<Edge*> minPathback;
-        for(auto & d : depots){
-            double distf = bi.run(d,client);
-            vector<Edge*> pathf = bi.getPath(d,client);
-            double distb = bi.run(client, d);
-            vector<Edge*> pathb = bi.getPath(client, d);
-            if(distb + distf < minDistback + minDistfront){
+        vector<Edge *> minPathfront;
+        vector<Edge *> minPathback;
+        vector<Edge *> pathf;
+        vector<Edge *> pathb;
+        for (auto &d : depots) {
+            double distf = dijkstra[d]->getPath(d, client, pathf);
+            double distb = dijkstra[client]->getPath(client, d, pathb);
+            if (distb + distf < minDistback + minDistfront) {
                 minDistfront = distf;
                 minDistback = distb;
-                vector<Edge*> minPathfront = pathf;
-                vector<Edge*> minPathback = pathb;
+                vector<Edge *> minPathfront = pathf;
+                vector<Edge *> minPathback = pathb;
                 depot = d;
             }
         }
@@ -99,21 +98,53 @@ void POI::associate() {
 }
 
 void POI::calculateCostFunctions() {
-    BiDijkstra bi(graph);
-
-    for(auto & d : depots){
-        for(auto & c1 : association[d]){
-            for(auto & c2 : association[d]){
-                Node * client1 = c1.first;
-                Node * client2 = c2.first;
-                if(c1.first != c2.first){
-                    costFunctions[d][client1][client2] = bi.run(client1, client2);
-                    paths[d][client1][client2]= bi.getPath(client1,client2);
-                    costFunctions[d][client1][client2] = bi.run(client1, client2);
-                    paths[d][client1][client2]= bi.getPath(client1,client2);
+    for(auto & d : depots) {
+        for (auto &c1 : association[d]) {
+            for (auto &c2 : association[d]) {
+                Node *client1 = c1.first;
+                Node *client2 = c2.first;
+                vector<Edge *> pathFront;
+                vector<Edge *> pathBack;
+                if (c1.first != c2.first) {
+                    costFunctions[d][client1][client2] = dijkstra[client1]->getPath(client1, client2, pathFront);
+                    paths[d][client1][client2] = pathFront;
+                    costFunctions[d][client1][client2] = dijkstra[client2]->getPath(client2, client1, pathBack);
+                    paths[d][client1][client2] = pathBack;
                 }
             }
         }
+    }
+}
+
+void POI::printteste() {
+    for(auto & d : depots){
+        cout << d->getId() << endl;
+        for(auto &c : association[d]){
+            cout << c.first->getId() << " - " << c.second << endl;
+        }
+    }
+}
+
+void POI::preProcess() {
+    for(auto & d : depots){
+        Dijkstra * dk = new Dijkstra(graph);
+        dk->run(d);
+        dijkstra[d] = dk;
+    }
+
+    for(auto & c : clients){
+        Dijkstra * dk = new Dijkstra(graph);
+        dk->run(c.first);
+        dijkstra[c.first] = dk;
+    }
+
+    associate();
+    calculateCostFunctions();
+}
+
+POI::~POI() {
+    for(auto & dj : dijkstra){
+        delete dj.second;
     }
 }
 
