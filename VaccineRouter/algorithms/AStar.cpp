@@ -40,6 +40,7 @@ double AStar::run(Node *orig, Node *dest) {
                 q.push({-dist[in] - heuristic[in], in});
                 path[in] = edge;
             }
+            trace.push_back(edge);
         }
     }
 

@@ -3,9 +3,10 @@
 //
 
 #include <iostream>
+#include <zconf.h>
+#include <synchapi.h>
 #include "graphviewer.h"
 #include "GraphDisplayer.h"
-#include "lib/GraphViewerCpp/SFML/include/SFML/System.hpp"
 
 using namespace std;
 using gvNode = GraphViewer::Node;
@@ -92,7 +93,7 @@ void GraphDisplayer::display(){
     gv.setZipEdges(false);*/
 
     gv.createWindow(1600, 900);
-    gv.join();
+    //gv.join();
 }
 
 void GraphDisplayer::highlightPOI(unordered_map<Node*,double> &clients, vector<Node *> &depot) {
@@ -120,3 +121,39 @@ void GraphDisplayer::highlightPath(std::vector<Edge *> path) {
     gv.setEnabledEdgesText(false); // Disable edge text drawing
     gv.setZipEdges(true);
 }
+
+void GraphDisplayer::traceAnimation(vector<Edge*> trace) {
+    for(auto & e : trace){
+        gv.lock();
+        gvEdge &edge = gv.getEdge(graph->getEdgeId(e));
+        edge.setColor(GraphViewer::RED);
+        edge.setThickness(5.0);
+        gv.unlock();
+        usleep(100);
+    }
+    gv.join();
+}
+
+void GraphDisplayer::biTraceAnimation(std::vector<Edge *> traceF, std::vector<Edge *> traceB) {
+    for(auto it1 = traceF.begin(), it2 = traceB.begin(); it1 != traceF.end() && it2 != traceB.end();){
+        gv.lock();
+        if(it1 != traceF.end()){
+            gvEdge &edge = gv.getEdge(graph->getEdgeId(*(it1)));
+            edge.setColor(GraphViewer::RED);
+            edge.setThickness(5.0);
+            it1++;
+        }
+        gv.unlock();
+        gv.lock();
+        if(it2 != traceB.end()){
+            gvEdge &edge = gv.getEdge(graph->getEdgeId(*(it2)));
+            edge.setColor(GraphViewer::GREEN);
+            edge.setThickness(5.0);
+            it2++;
+        }
+        gv.unlock();
+        usleep(100);
+    }
+    gv.join();
+}
+

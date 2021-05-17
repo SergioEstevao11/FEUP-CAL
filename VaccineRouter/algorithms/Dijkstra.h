@@ -18,6 +18,7 @@ private:
     //std::unordered_map<Node *, double> dist; USED FOR TESTING
     std::unordered_map<Node *, Edge *> path;
     std::unordered_map<Node*, bool> visited;
+    std::vector<Edge*> trace;
     void setup();
 
 public:
@@ -25,6 +26,7 @@ public:
     std::unordered_map<Node *, double> dist;
     void run(Node* node);
     double getPath(Node * source, Node * dist, std::vector<Edge *> &retPath);
+    std::vector<Edge*> getTrace(){return trace;};
 };
 
 

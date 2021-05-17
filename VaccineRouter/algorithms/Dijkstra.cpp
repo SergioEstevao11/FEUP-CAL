@@ -18,6 +18,7 @@ void Dijkstra::setup() {
         visited[node] = false;
         path[node] = nullptr;
     }
+    trace.clear();
 }
 
 void Dijkstra::run(Node *node) {
@@ -38,6 +39,7 @@ void Dijkstra::run(Node *node) {
                 q.push({-dist[in], in});
                 path[in] = edge;
             }
+            trace.push_back(edge);
         }
     }
 }

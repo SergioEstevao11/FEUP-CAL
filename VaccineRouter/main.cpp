@@ -36,30 +36,18 @@ int main() {
     cout << std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count() << endl;
     poi.printteste();*/
     GraphDisplayer gd(&g);
-    AStar a(&g);
     Dijkstra d(&g);
-    BiDijkstra bi(&g);
-    Node * source = g.getNode(34460);
-    Node * dest = g.getNode(29050);
+    Node * source = g.getNode(11396);
+    Node * dest = g.getNode(11320);
     d.run(source);
-    bi.run(source,dest);
-    vector<Edge*> v = bi.getPath(source,dest);
-            //cout << bi.run(source,dest) << " - " << a.run(source,dest) << " - " << d.getPath(source,dest,v) << endl;
-    //gd.highlightPOI(poi.getClients(), poi.getDepots());
-    gd.highlightPath(v);
     gd.display();
-    //gd.setDefaultColor();
-    /*Dijkstra dijk(&g);
-    Dijkstra ast(&g);
-    dijk.dijkstra(g.getNode(50));
-    std::cout << "unidirected dijkstra: " << dijk.dist[g.getNode(56)] << std::endl;
-    ast.aStar(g.getNode(50));
-    std::cout << "unidirected aStar: " << ast.dist[g.getNode(56)] << std::endl;*/
-    /*GraphDisplayer gd(&g);
+    gd.traceAnimation(d.getTrace());
+    //cout << bi.run(source,dest) << " - " << a.run(source,dest) << " - " << d.getPath(source,dest,v) << endl;
+    //gd.highlightPOI(poi.getClients(), poi.getDepots());
+    /*gd.highlightPath(v);
+    gd.display();*/
 
-    //gd.SetDefaultColor();
-
-    menuInterface menu(&gd);
+    /*menuInterface menu(&gd);
     menu.mainMenuHandler();*/
 
 }

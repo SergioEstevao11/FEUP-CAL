@@ -25,6 +25,8 @@ public:
     void highLightNodes(std::vector<GraphViewer::id_t> path, const sf::Color &color);
     void highlightPOI(std::unordered_map<Node *, double> &clients, std::vector<Node*> &depot);
     void highlightPath(std::vector<Edge*> path);
+    void traceAnimation(std::vector<Edge*> trace);
+    void biTraceAnimation(std::vector<Edge*> traceForward, std::vector<Edge*> traceBackward);
 };
 
 

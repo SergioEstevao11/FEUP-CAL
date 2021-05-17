@@ -60,6 +60,7 @@ double BiDijkstra::run(Node *orig, Node *dest) {
                         pathf[pr] = edge;
                     }
                 }
+                traceForward.push_back(edge);
             }
             visitedForward[nf] = true;
         }
@@ -78,6 +79,7 @@ double BiDijkstra::run(Node *orig, Node *dest) {
                         midPoint = nb;
                         pathf[nb] = edge;
                     }
+                traceBackward.push_back(edge);
             }
             visitedBackward[nb] = true;
         }

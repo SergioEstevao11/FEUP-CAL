@@ -20,11 +20,15 @@ private:
     std::unordered_map<Node *, Edge *> pathb;
     std::unordered_map<Node*, bool> visitedForward;
     std::unordered_map<Node*, bool> visitedBackward;
+    std::vector<Edge*> traceForward;
+    std::vector<Edge*> traceBackward;
     void setup();
 public:
     BiDijkstra(Graph * graph);
     double run(Node * orig, Node* dest);
     std::vector<Edge *> getPath(Node * source, Node * dist);
+    std::vector<Edge*> getTraceForward(){return traceForward;};
+    std::vector<Edge*> getTraceBackward(){return traceBackward;};
 };
 
 

@@ -17,6 +17,7 @@ private:
     std::unordered_map<Node *, Edge *> path;
     std::unordered_map<Node*, bool> visited;
     std::unordered_map<Node *, double> heuristic;
+    std::vector<Edge*> trace;
     void setup(Node * dest);
 
 public:
@@ -24,6 +25,7 @@ public:
     std::unordered_map<Node *, double> dist;
     double run(Node* orig, Node* dest);
     std::vector<Edge *> getPath(Node * source, Node * dist);
+    std::vector<Edge*> getTrace(){return trace;};
 };
 
 
