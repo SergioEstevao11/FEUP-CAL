@@ -8,18 +8,21 @@
 
 #include "../graph/Graph.h"
 
+#include <vector>
+
 class BiDijkstra {
 private:
     Graph * graph;
     std::unordered_map<Node *, double> distForward;
     std::unordered_map<Node *, double> distBackward;
-    std::unordered_map<Node *, Node *> path;
+    std::unordered_map<Node *, Edge *> path;
     std::unordered_map<Node*, bool> visitedForward;
     std::unordered_map<Node*, bool> visitedBackward;
     void setup();
 public:
     BiDijkstra(Graph * graph);
     double run(Node * orig, Node* dest);
+    std::vector<Edge *> getPath(Node * source, Node * dist);
 };
 
 

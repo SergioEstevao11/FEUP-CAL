@@ -49,7 +49,7 @@ double BiDijkstra::run(Node *orig, Node *dest) {
                 if(distForward[pr] > distForward[nf] + w){
                     distForward[pr] = distForward[nf] + w;
                     qf.push({-distForward[pr], pr});
-                    path[pr] = nf;
+                    path[pr] = edge;
                 }
                 if(visitedBackward[pr])
                     minDist = min(minDist, distForward[nf] + w + distBackward[pr]);
@@ -63,7 +63,7 @@ double BiDijkstra::run(Node *orig, Node *dest) {
                 if(distBackward[pr] > distBackward[nb] + w){
                     distBackward[pr] = distBackward[nb] + w;
                     qb.push({-distBackward[pr], pr});
-                    path[nb] = pr;
+                    path[nb] = edge;
                 }
                 if(visitedForward[pr])
                     minDist = min(minDist, distForward[pr] + w + distBackward[nb]);
@@ -73,4 +73,14 @@ double BiDijkstra::run(Node *orig, Node *dest) {
     }
 
     return Graph::INF;
+}
+
+std::vector<Edge *> BiDijkstra::getPath(Node *source, Node *dest) {
+    vector<Edge *> edgePath;
+    Node * it = dest;
+    while(path[it] != nullptr){
+        edgePath.push_back(path[it]);
+        it = path[it]->getBegin();
+    }
+    return edgePath;
 }

@@ -10,6 +10,8 @@
 
 #include "lib/GraphViewerCpp/include/graphviewer.h"
 
+
+
 class GraphDisplayer {
     Graph *graph;
     GraphViewer gv;
@@ -17,10 +19,11 @@ public:
     GraphDisplayer(Graph * graph);
     void display(std::vector<std::vector<Edge*>> paths);
     void display();
-    void SetDefaultColor();
-    void HighlightEdges(std::vector<GraphViewer::Edge*> path, const sf::Color &color); //provavelmente não funciona
-    void HighlightEdges(std::vector<GraphViewer::id_t> path, const sf::Color &color);
-    void HighLightNodes(std::vector<GraphViewer::id_t> path, const sf::Color &color);
+    void setDefaultColor();
+    void highlightEdges(std::vector<GraphViewer::Edge*> path, const sf::Color &color); //provavelmente não funciona
+    void highlightEdges(std::vector<GraphViewer::id_t> path, const sf::Color &color);
+    void highLightNodes(std::vector<GraphViewer::id_t> path, const sf::Color &color);
+    void highlightPOI(std::unordered_map<Node *, double> &clients, std::vector<Node*> &depot);
 };
 
 

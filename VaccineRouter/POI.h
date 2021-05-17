@@ -14,14 +14,19 @@ class POI {
 private:
     Graph *graph;
     std::vector<Node*> depots;
-    std::vector<Node*> clients;
+    std::unordered_map<Node*, double> clients;
     std::unordered_map<Node*, std::unordered_map<Node*, double> >association;
     std::unordered_map<Node*, std::unordered_map<Node *, std::unordered_map<Node*,double>>> costFunctions;
-    std::unordered_map<Node*, std::unordered_map<Node *, std::unordered_map<Node*,std::vector<Node*>>>> paths;
+    std::unordered_map<Node*, std::unordered_map<Node *, std::unordered_map<Node*,std::vector<Edge*>>>> paths;
 public:
-    void readDepots(std::string & filename);
-    void readClients(std::string & filename);
+    POI(Graph * graph);
+    void readDepots(std::string filename);
+    void readClients(std::string filename);
     void associate();
+    void calculateCostFunctions();
+    //void printteste();
+    std::vector<Node*> &getDepots(){return depots;};
+    std::unordered_map<Node*, double> &getClients(){return clients;};
 };
 
 

@@ -23,10 +23,10 @@ GraphDisplayer::GraphDisplayer(Graph *graph) {
         gvEdge &edge = gv.addEdge(e.first, gv.getNode(e.second->getBegin()->getId()), gv.getNode(e.second->getEnd()->getId()));
     }
 
-    SetDefaultColor();
+    setDefaultColor();
 }
 
-void GraphDisplayer::SetDefaultColor(){
+void GraphDisplayer::setDefaultColor(){
     for(auto &v : gv.getNodes()){
         v->setOutlineThickness(0.0);
         v->setSize(5.0);
@@ -38,20 +38,20 @@ void GraphDisplayer::SetDefaultColor(){
     }
 }
 
-void GraphDisplayer::HighlightEdges(std::vector<GraphViewer::Edge*> path, const sf::Color &color){
+void GraphDisplayer::highlightEdges(std::vector<GraphViewer::Edge*> path, const sf::Color &color){
     for(auto &e : path){
         e->setColor(color);
     }
 }
 
-void GraphDisplayer::HighlightEdges(std::vector<GraphViewer::id_t> path, const sf::Color &color){
+void GraphDisplayer::highlightEdges(std::vector<GraphViewer::id_t> path, const sf::Color &color){
     for(auto &id : path){
         auto e = gv.getEdge(id);
         e.setColor(color);
     }
 }
 
-void GraphDisplayer::HighLightNodes(std::vector<GraphViewer::id_t> nodes, const sf::Color &color){
+void GraphDisplayer::highLightNodes(std::vector<GraphViewer::id_t> nodes, const sf::Color &color){
     for(auto &id : nodes){
         auto n = gv.getNode(id);
         n.setColor(color);
@@ -93,4 +93,18 @@ void GraphDisplayer::display(){
 
     gv.createWindow(1600, 900);
     gv.join();
+}
+
+void GraphDisplayer::highlightPOI(unordered_map<Node*,double> &clients, vector<Node *> &depot) {
+    for(auto & c : clients){
+        gvNode &node = gv.getNode(c.first->getId());
+        node.setColor(GraphViewer::ORANGE);
+        node.setSize(50);
+    }
+
+    for(auto & d : depot){
+        gvNode &node = gv.getNode(d->getId());
+        node.setColor(GraphViewer::GREEN);
+        node.setSize(50);
+    }
 }

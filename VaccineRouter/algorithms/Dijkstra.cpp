@@ -36,8 +36,18 @@ void Dijkstra::run(Node *node) {
             if(dist[in] > dist[out] + w){
                 dist[in] = dist[out] + w;
                 q.push({-dist[in], in});
-                path[in] = out;
+                path[in] = edge;
             }
         }
     }
+}
+
+std::vector<Edge *> Dijkstra::getPath(Node *source, Node *dest) {
+    vector<Edge *> edgePath;
+    Node * it = dest;
+    while(path[it] != nullptr){
+        edgePath.push_back(path[it]);
+        it = path[it]->getBegin();
+    }
+    return edgePath;
 }

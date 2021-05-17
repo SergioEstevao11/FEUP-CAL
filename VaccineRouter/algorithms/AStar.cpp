@@ -38,10 +38,20 @@ double AStar::run(Node *orig, Node *dest) {
             if(dist[in] > dist[out] + w){
                 dist[in] = dist[out] + w;
                 q.push({-dist[in] - heuristic[in], in});
-                path[in] = out;
+                path[in] = edge;
             }
         }
     }
 
     return Graph::INF;
+}
+
+std::vector<Edge *> AStar::getPath(Node *source, Node *dest) {
+    vector<Edge *> edgePath;
+    Node * it = dest;
+    while(path[it] != nullptr){
+        edgePath.push_back(path[it]);
+        it = path[it]->getBegin();
+    }
+    return edgePath;
 }

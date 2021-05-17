@@ -16,7 +16,7 @@ class Dijkstra {
 private:
     Graph * graph;
     //std::unordered_map<Node *, double> dist; USED FOR TESTING
-    std::unordered_map<Node *, Node *> path;
+    std::unordered_map<Node *, Edge *> path;
     std::unordered_map<Node*, bool> visited;
     void setup();
 
@@ -24,6 +24,7 @@ public:
     Dijkstra(Graph * g);
     std::unordered_map<Node *, double> dist;
     void run(Node* node);
+    std::vector<Edge *> getPath(Node * source, Node * dist);
 };
 
 
