@@ -5,6 +5,7 @@
 #include "ClarkeWright.h"
 
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
@@ -69,4 +70,15 @@ ClarkeWright::~ClarkeWright() {
     for(auto &r : finalRoutes){
         delete r;
     }
+}
+
+ClarkeWright::ClarkeWright(Node *depot,
+                           std::unordered_map<Node *, double> order,
+                           std::unordered_map<Node *, std::unordered_map<Node *, double>> costFunction,
+                           double maxT, double maxQ) {
+    this->depot = depot;
+    this->order = order;
+    this->costFunction = costFunction;
+    this->maxT = maxT;
+    this->maxQ = maxQ;
 }

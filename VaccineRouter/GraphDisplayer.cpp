@@ -93,7 +93,7 @@ void GraphDisplayer::display(){
     gv.setZipEdges(false);*/
 
     gv.createWindow(1600, 900);
-    //gv.join();
+    gv.join();
 }
 
 void GraphDisplayer::highlightPOI(unordered_map<Node*,double> &clients, vector<Node *> &depot) {
@@ -117,9 +117,9 @@ void GraphDisplayer::highlightPath(std::vector<Edge *> path) {
         edge.setThickness(5);
     }
 
-    gv.setEnabledNodes(false); // Disable node drawing
+    /*gv.setEnabledNodes(false); // Disable node drawing
     gv.setEnabledEdgesText(false); // Disable edge text drawing
-    gv.setZipEdges(true);
+    gv.setZipEdges(true);*/
 }
 
 void GraphDisplayer::traceAnimation(vector<Edge*> trace) {

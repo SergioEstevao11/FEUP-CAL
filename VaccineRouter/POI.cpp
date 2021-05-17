@@ -4,6 +4,8 @@
 
 #include "POI.h"
 #include "algorithms/BiDijkstra.h"
+#include "algorithms/AStar.h"
+#include "algorithms/ClarkeWright.h"
 
 #include <fstream>
 #include <iostream>
@@ -84,8 +86,8 @@ void POI::associate() {
             if (distb + distf < minDistback + minDistfront) {
                 minDistfront = distf;
                 minDistback = distb;
-                vector<Edge *> minPathfront = pathf;
-                vector<Edge *> minPathback = pathb;
+                minPathfront = pathf;
+                minPathback = pathb;
                 depot = d;
             }
         }
@@ -148,3 +150,21 @@ POI::~POI() {
     }
 }
 
+std::vector<Edge *> POI::testiguess() {
+    vector<Edge*> pp;
+    for(auto & depot : depots){
+        ClarkeWright cw(depot, association[depot], costFunctions[depot], 100000, 100);
+        cw.run();
+        unordered_set<Route*> ans = cw.getRoutes();
+        cout << ans.size() << endl;
+        for(auto & v : ans){
+            vector<Node*> aa = v->getNodes();
+            pp.insert(pp.end(), paths[depot][depot][aa[0]].begin(), paths[depot][depot][aa[0]].end());
+            for(int i = 0; i < aa.size() - 1; i++){
+                pp.insert(pp.end(), paths[depot][aa[i]][aa[i+1]].begin(), paths[depot][aa[i]][aa[i+1]].end());
+            }
+            pp.insert(pp.end(), paths[depot][aa[aa.size() - 1]][depot].begin(), paths[depot][aa[aa.size() - 1]][depot].end());
+        }
+    }
+    return pp;
+}

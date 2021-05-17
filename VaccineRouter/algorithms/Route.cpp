@@ -3,8 +3,11 @@
 //
 
 #include "Route.h"
+#include <iostream>
 
-Route::Route(Node *node, double weight, double capacity, double maxCapacity, double maxWeight) {
+using namespace std;
+
+Route::Route(Node *node, double weight, double capacity, double maxWeight, double maxCapacity) {
     nodes.push_back(node);
     this->weight = weight;
     this->capacity = capacity;
@@ -21,10 +24,11 @@ bool Route::isLastNode(Node *node) {
 }
 
 bool Route::addRoute(Route *route, double saving) {
-    if(route->getWeight() + weight - saving > maxWeight) return false;
+    if((route->getWeight() + weight - saving) > maxWeight) return false;
     if(route->getCapacity() + capacity > maxCapacity) return false;
 
-    nodes.insert(nodes.end(), route->getNodes().begin(), route->getNodes().end());
+    vector<Node*> newNodes = route->getNodes();
+    nodes.insert(nodes.end(), newNodes.begin(), newNodes.end());
     capacity += route->getCapacity();
     weight  = route->getWeight() + weight - saving;
     return true;

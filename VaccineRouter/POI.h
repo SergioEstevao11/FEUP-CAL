@@ -31,6 +31,7 @@ public:
     void printteste();
     std::vector<Node*> &getDepots(){return depots;};
     std::unordered_map<Node*, double> &getClients(){return clients;};
+    std::vector<Edge*> testiguess();
 };
 
 

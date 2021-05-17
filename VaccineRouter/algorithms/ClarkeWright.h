@@ -35,8 +35,13 @@ private:
     void calculateSavings();
     void makeInitialRoutes();
 public:
+    ClarkeWright(Node * depot,
+                 std::unordered_map<Node *,double> order,
+                 std::unordered_map<Node *, std::unordered_map<Node*,double>> costFunction,
+                 double maxT, double maxQ);
     ~ClarkeWright();
     void run();
+    std::unordered_set<Route*> getRoutes(){return finalRoutes;};
 };
 
 
