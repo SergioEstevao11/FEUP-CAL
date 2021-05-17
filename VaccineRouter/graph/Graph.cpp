@@ -50,7 +50,7 @@ void Graph::addEdge(Edge *edge) {
 
     adjList[edge->getBegin()].insert(edge);
     predAdjList[edge->getEnd()].insert(edge);
-    edgeMap[edgeCounter++] = edge;
+    edgeMap[edge] = edgeCounter++;
 }
 
 Node *Graph::getNode(unsigned int id) {

@@ -13,9 +13,11 @@
 class BiDijkstra {
 private:
     Graph * graph;
+    Node * midPoint;
     std::unordered_map<Node *, double> distForward;
     std::unordered_map<Node *, double> distBackward;
-    std::unordered_map<Node *, Edge *> path;
+    std::unordered_map<Node *, Edge *> pathf;
+    std::unordered_map<Node *, Edge *> pathb;
     std::unordered_map<Node*, bool> visitedForward;
     std::unordered_map<Node*, bool> visitedBackward;
     void setup();

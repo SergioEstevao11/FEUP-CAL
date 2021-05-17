@@ -24,6 +24,7 @@ public:
     void highlightEdges(std::vector<GraphViewer::id_t> path, const sf::Color &color);
     void highLightNodes(std::vector<GraphViewer::id_t> path, const sf::Color &color);
     void highlightPOI(std::unordered_map<Node *, double> &clients, std::vector<Node*> &depot);
+    void highlightPath(std::vector<Edge*> path);
 };
 
 

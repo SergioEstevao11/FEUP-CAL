@@ -20,7 +20,7 @@ GraphDisplayer::GraphDisplayer(Graph *graph) {
         gvNode &node = gv.addNode(v->getId(), sf::Vector2f(v->getX(), v->getY()));
     }
     for(auto &e : graph->getEdges()){
-        gvEdge &edge = gv.addEdge(e.first, gv.getNode(e.second->getBegin()->getId()), gv.getNode(e.second->getEnd()->getId()));
+        gvEdge &edge = gv.addEdge(e.second, gv.getNode(e.first->getBegin()->getId()), gv.getNode(e.first->getEnd()->getId()));
     }
 
     setDefaultColor();
@@ -29,8 +29,8 @@ GraphDisplayer::GraphDisplayer(Graph *graph) {
 void GraphDisplayer::setDefaultColor(){
     for(auto &v : gv.getNodes()){
         v->setOutlineThickness(0.0);
-        v->setSize(5.0);
-        v->setColor(GraphViewer::BLUE);
+        v->setSize(0.0);
+        v->setColor(GraphViewer::WHITE);
     }
     for(auto &e : gv.getEdges()){
         e->setThickness(1);
@@ -87,9 +87,9 @@ void GraphDisplayer::display(std::vector<std::vector<Edge*>> paths) {
 
 void GraphDisplayer::display(){
 
-    gv.setEnabledNodes(true); // Disable node drawing
+    /*gv.setEnabledNodes(true); // Disable node drawing
     gv.setEnabledEdgesText(false); // Disable edge text drawing
-    gv.setZipEdges(false);
+    gv.setZipEdges(false);*/
 
     gv.createWindow(1600, 900);
     gv.join();
@@ -107,4 +107,16 @@ void GraphDisplayer::highlightPOI(unordered_map<Node*,double> &clients, vector<N
         node.setColor(GraphViewer::GREEN);
         node.setSize(50);
     }
+}
+
+void GraphDisplayer::highlightPath(std::vector<Edge *> path) {
+    for(auto &e : path){
+        gvEdge &edge = gv.getEdge(graph->getEdgeId(e));
+        edge.setColor(GraphViewer::RED);
+        edge.setThickness(5);
+    }
+
+    gv.setEnabledNodes(false); // Disable node drawing
+    gv.setEnabledEdgesText(false); // Disable edge text drawing
+    gv.setZipEdges(true);
 }

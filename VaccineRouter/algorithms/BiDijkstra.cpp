@@ -5,6 +5,7 @@
 #include "BiDijkstra.h"
 
 #include <queue>
+#include <iostream>
 
 using namespace std;
 
@@ -18,7 +19,8 @@ void BiDijkstra::setup() {
         distBackward[node] = Graph::INF;
         visitedForward[node] = false;
         visitedBackward[node] = false;
-        path[node] = nullptr;
+        pathf[node] = nullptr;
+        pathb[node] = nullptr;
     }
 }
 
@@ -32,7 +34,7 @@ double BiDijkstra::run(Node *orig, Node *dest) {
 
     distForward[orig] = 0;
     distBackward[dest] = 0;
-    path[orig] = nullptr;
+    pathf[orig] = nullptr;
 
     double minDist = Graph::INF;
 
@@ -49,10 +51,15 @@ double BiDijkstra::run(Node *orig, Node *dest) {
                 if(distForward[pr] > distForward[nf] + w){
                     distForward[pr] = distForward[nf] + w;
                     qf.push({-distForward[pr], pr});
-                    path[pr] = edge;
+                    pathf[pr] = edge;
                 }
-                if(visitedBackward[pr])
-                    minDist = min(minDist, distForward[nf] + w + distBackward[pr]);
+                if(visitedBackward[pr]){
+                    if(distForward[nf] + w + distBackward[pr] < minDist){
+                        minDist = distForward[nf] + w + distBackward[pr];
+                        midPoint = pr;
+                        pathf[pr] = edge;
+                    }
+                }
             }
             visitedForward[nf] = true;
         }
@@ -63,10 +70,14 @@ double BiDijkstra::run(Node *orig, Node *dest) {
                 if(distBackward[pr] > distBackward[nb] + w){
                     distBackward[pr] = distBackward[nb] + w;
                     qb.push({-distBackward[pr], pr});
-                    path[nb] = edge;
+                    pathb[pr] = edge;
                 }
                 if(visitedForward[pr])
-                    minDist = min(minDist, distForward[pr] + w + distBackward[nb]);
+                    if( distForward[pr] + w + distBackward[nb] < minDist){
+                        minDist = distForward[pr] + w + distBackward[nb];
+                        midPoint = nb;
+                        pathf[nb] = edge;
+                    }
             }
             visitedBackward[nb] = true;
         }
@@ -77,10 +88,17 @@ double BiDijkstra::run(Node *orig, Node *dest) {
 
 std::vector<Edge *> BiDijkstra::getPath(Node *source, Node *dest) {
     vector<Edge *> edgePath;
-    Node * it = dest;
-    while(path[it] != nullptr){
-        edgePath.push_back(path[it]);
-        it = path[it]->getBegin();
+    Node * it = midPoint;
+    while(pathf[it] != nullptr){
+        edgePath.push_back(pathf[it]);
+        it = pathf[it]->getBegin();
     }
+    cout << it->getId() << endl;
+    it = midPoint;
+    while(pathb[it] != nullptr){
+        edgePath.push_back(pathb[it]);
+        it = pathb[it]->getEnd();
+    }
+    cout << it->getId() << endl;
     return edgePath;
 }
