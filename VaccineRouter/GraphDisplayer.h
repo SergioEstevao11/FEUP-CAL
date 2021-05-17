@@ -11,6 +11,7 @@
 class GraphDisplayer {
     Graph *graph;
 public:
+    GraphDisplayer();
     GraphDisplayer(Graph * graph);
     void display();
 };

@@ -7,6 +7,7 @@
 #include "algorithms/Tarjan.h"
 #include "algorithms/AStar.h"
 #include "GraphDisplayer.h"
+#include "menu/menuInterface.h"
 
 using namespace std;
 
@@ -26,7 +27,9 @@ int main() {
     ast.aStar(g.getNode(50));
     std::cout << "unidirected aStar: " << ast.dist[g.getNode(56)] << std::endl;*/
     GraphDisplayer gd(&g);
-    gd.display();
+    menuInterface menu(gd);
+    menu.mainMenuHandler();
+    //gd.display();
     /*BiDijkstra twodijk(&g);
     AStar as(&g);
     int i = 0;
