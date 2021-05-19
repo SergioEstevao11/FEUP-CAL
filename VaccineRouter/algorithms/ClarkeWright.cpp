@@ -46,7 +46,7 @@ void ClarkeWright::run() {
     calculateSavings();
     sortSavings();
     for(auto & save : savings){
-        if(save.save < 0) break;
+        if(save.save <= 0) break;
         Route * from = routes[save.from];
         Route * to = routes[save.to];
         if(from == to) continue;

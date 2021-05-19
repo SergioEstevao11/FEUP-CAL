@@ -153,11 +153,12 @@ POI::~POI() {
 std::vector<Edge *> POI::testiguess() {
     vector<Edge*> pp;
     for(auto & depot : depots){
-        ClarkeWright cw(depot, association[depot], costFunctions[depot], 100000, 100);
+        ClarkeWright cw(depot, association[depot], costFunctions[depot], 12000, 100);
         cw.run();
         unordered_set<Route*> ans = cw.getRoutes();
         cout << ans.size() << endl;
         for(auto & v : ans){
+            cout << v->getWeight() << endl;
             vector<Node*> aa = v->getNodes();
             pp.insert(pp.end(), paths[depot][depot][aa[0]].begin(), paths[depot][depot][aa[0]].end());
             for(int i = 0; i < aa.size() - 1; i++){
