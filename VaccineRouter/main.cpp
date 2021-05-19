@@ -24,20 +24,22 @@ int main() {
     gReader.readNodes(nodeS);
     gReader.readEdges(edgeS);
 
-    POI poi(&g);
+    /*POI poi(&g);
     poi.readDepots("../maps/depots.txt");
-    poi.readClients("../maps/clients.txt");
+    poi.readClients("../maps/clients.txt");*/
     GraphDisplayer gd(&g);
-    auto start_time = hrc::now();
+    /*auto start_time = hrc::now();
     poi.preProcess();
     auto end_time = hrc::now();
     cout << std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count() << endl;
     poi.printteste();
     vector <Edge*> ans = poi.testiguess();
     gd.highlightPOI(poi.getClients(), poi.getDepots());
-    gd.highlightPath(ans);
+    gd.highlightPath(ans);*/
+    BiDijkstra d(&g);
+    d.run(g.getNode(38341), g.getNode(38475));
     gd.display();
-
+    gd.biTraceAnimation(d.getTraceForward(), d.getTraceBackward());
     /*menuInterface menu(&gd);
     menu.mainMenuHandler();*/
 

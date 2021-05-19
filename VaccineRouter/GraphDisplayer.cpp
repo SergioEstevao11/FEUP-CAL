@@ -93,7 +93,7 @@ void GraphDisplayer::display(){
     gv.setZipEdges(false);*/
 
     gv.createWindow(1600, 900);
-    gv.join();
+    //gv.join();
 }
 
 void GraphDisplayer::highlightPOI(unordered_map<Node*,double> &clients, vector<Node *> &depot) {
@@ -123,6 +123,7 @@ void GraphDisplayer::highlightPath(std::vector<Edge *> path) {
 }
 
 void GraphDisplayer::traceAnimation(vector<Edge*> trace) {
+    usleep(1000000);
     for(auto & e : trace){
         gv.lock();
         gvEdge &edge = gv.getEdge(graph->getEdgeId(e));
@@ -135,6 +136,7 @@ void GraphDisplayer::traceAnimation(vector<Edge*> trace) {
 }
 
 void GraphDisplayer::biTraceAnimation(std::vector<Edge *> traceF, std::vector<Edge *> traceB) {
+    usleep(1000000);
     for(auto it1 = traceF.begin(), it2 = traceB.begin(); it1 != traceF.end() && it2 != traceB.end();){
         gv.lock();
         if(it1 != traceF.end()){
