@@ -8,7 +8,7 @@
 #include "algorithms/AStar.h"
 #include "GraphDisplayer.h"
 #include "menu/menuInterface.h"
-#include "POI.h"
+#include "Manager.h"
 
 #include <chrono>
 typedef std::chrono::high_resolution_clock hrc;
@@ -16,30 +16,21 @@ typedef std::chrono::high_resolution_clock hrc;
 using namespace std;
 
 int main() {
-    Graph g;
-    GraphReader gReader(&g);
-
     std::string nodeS = "../maps/porto_full_nodes_xy.txt";
     std::string edgeS = "../maps/porto_full_edges.txt";
-    gReader.readNodes(nodeS);
-    gReader.readEdges(edgeS);
+    std::string depotsS = "../maps/depots.txt";
+    std::string clientsS = "../maps/clients.txt";
+    Manager manager(nodeS, edgeS, depotsS, clientsS);
+    vector<vector<vector<Edge*>>> routes;
+    manager.getRoutes(routes);
 
-    /*POI poi(&g);
-    poi.readDepots("../maps/depots.txt");
-    poi.readClients("../maps/clients.txt");*/
-    GraphDisplayer gd(&g);
-    /*auto start_time = hrc::now();
-    poi.preProcess();
-    auto end_time = hrc::now();
-    cout << std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count() << endl;
-    poi.printteste();
-    vector <Edge*> ans = poi.testiguess();
-    gd.highlightPOI(poi.getClients(), poi.getDepots());
-    gd.highlightPath(ans);*/
-    BiDijkstra d(&g);
-    d.run(g.getNode(38341), g.getNode(38475));
+    GraphDisplayer gd(manager.getGraph());
+    vector<Node*> depots;
+    unordered_map<Node*, double> clients;
+    manager.getPOI(depots,clients);
+    gd.highlightPOI(clients, depots);
+    gd.highlightRoutes(routes);
     gd.display();
-    gd.biTraceAnimation(d.getTraceForward(), d.getTraceBackward());
     /*menuInterface menu(&gd);
     menu.mainMenuHandler();*/
 

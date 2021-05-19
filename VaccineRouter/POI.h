@@ -1,7 +1,3 @@
-//
-// Created by rodrigo on 14/05/2021.
-//
-
 #ifndef VACCINEROUTER_POI_H
 #define VACCINEROUTER_POI_H
 
@@ -23,15 +19,18 @@ private:
     void associate();
     void calculateCostFunctions();
 public:
-    POI(Graph * graph);
     ~POI();
-    void readDepots(std::string filename);
-    void readClients(std::string filename);
+    void setGraph(Graph * graph);
+    void readDepots(std::string &filename);
+    void readClients(std::string &filename);
     void preProcess();
-    void printteste();
     std::vector<Node*> &getDepots(){return depots;};
     std::unordered_map<Node*, double> &getClients(){return clients;};
-    std::vector<Edge*> testiguess();
+
+    std::unordered_map<Node *, double> &getAssociatedClients(Node * depot);
+
+    std::unordered_map<Node *, std::unordered_map<Node *, double>> &getCostFunction(Node * node);
+    std::unordered_map<Node *, std::unordered_map<Node *, std::vector<Edge*>>> &getPaths(Node * node);
 };
 
 

@@ -4,13 +4,22 @@
 
 #include <iostream>
 #include <zconf.h>
-#include <synchapi.h>
 #include "graphviewer.h"
 #include "GraphDisplayer.h"
 
 using namespace std;
 using gvNode = GraphViewer::Node;
 using gvEdge = GraphViewer::Edge;
+
+const unsigned int GraphDisplayer::NUMCOLORS = 6;
+
+const sf::Color GraphDisplayer::colors[] = {
+        GraphViewer::RED,
+        GraphViewer::BLUE,
+        GraphViewer::YELLOW,
+        GraphViewer::PINK,
+        GraphViewer::MAGENTA
+};
 
 GraphDisplayer::GraphDisplayer(Graph *graph) {
     this->graph = graph;
@@ -39,9 +48,11 @@ void GraphDisplayer::setDefaultColor(){
     }
 }
 
-void GraphDisplayer::highlightEdges(std::vector<GraphViewer::Edge*> path, const sf::Color &color){
+void GraphDisplayer::highlightEdges(std::vector<Edge*> path, const sf::Color &color){
     for(auto &e : path){
-        e->setColor(color);
+        gvEdge &edge = gv.getEdge(graph->getEdgeId(e));
+        edge.setColor(color);
+        edge.setThickness(5);
     }
 }
 
@@ -93,7 +104,7 @@ void GraphDisplayer::display(){
     gv.setZipEdges(false);*/
 
     gv.createWindow(1600, 900);
-    //gv.join();
+    gv.join();
 }
 
 void GraphDisplayer::highlightPOI(unordered_map<Node*,double> &clients, vector<Node *> &depot) {
@@ -135,7 +146,7 @@ void GraphDisplayer::traceAnimation(vector<Edge*> trace) {
     gv.join();
 }
 
-void GraphDisplayer::biTraceAnimation(std::vector<Edge *> traceF, std::vector<Edge *> traceB) {
+void GraphDisplayer::biTraceAnimation(std::vector<Edge *> &traceF, std::vector<Edge *> &traceB) {
     usleep(1000000);
     for(auto it1 = traceF.begin(), it2 = traceB.begin(); it1 != traceF.end() && it2 != traceB.end();){
         gv.lock();
@@ -157,5 +168,14 @@ void GraphDisplayer::biTraceAnimation(std::vector<Edge *> traceF, std::vector<Ed
         usleep(100);
     }
     gv.join();
+}
+
+void GraphDisplayer::highlightRoutes(vector<std::vector<std::vector<Edge *>>> &routes) {
+    for(auto &depotRoutes : routes){
+        for(int i = 0; i < depotRoutes.size(); i++){
+            highlightEdges(depotRoutes[i], colors[i % NUMCOLORS]);
+        }
+    }
+
 }
 

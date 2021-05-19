@@ -13,11 +13,7 @@
 
 using namespace std;
 
-POI::POI(Graph *graph) {
-    this->graph = graph;
-}
-
-void POI::readDepots(std::string filename) {
+void POI::readDepots(std::string &filename) {
     ifstream inFile;
     inFile.open(filename);
 
@@ -42,7 +38,7 @@ void POI::readDepots(std::string filename) {
     }
 }
 
-void POI::readClients(string filename) {
+void POI::readClients(string &filename) {
     ifstream inFile;
     inFile.open(filename);
 
@@ -118,15 +114,6 @@ void POI::calculateCostFunctions() {
     }
 }
 
-void POI::printteste() {
-    for(auto & d : depots){
-        cout << d->getId() << endl;
-        for(auto &c : association[d]){
-            cout << c.first->getId() << " - " << c.second << endl;
-        }
-    }
-}
-
 void POI::preProcess() {
     for(auto & d : depots){
         Dijkstra * dk = new Dijkstra(graph);
@@ -150,22 +137,18 @@ POI::~POI() {
     }
 }
 
-std::vector<Edge *> POI::testiguess() {
-    vector<Edge*> pp;
-    for(auto & depot : depots){
-        ClarkeWright cw(depot, association[depot], costFunctions[depot], 12000, 100);
-        cw.run();
-        unordered_set<Route*> ans = cw.getRoutes();
-        cout << ans.size() << endl;
-        for(auto & v : ans){
-            cout << v->getWeight() << endl;
-            vector<Node*> aa = v->getNodes();
-            pp.insert(pp.end(), paths[depot][depot][aa[0]].begin(), paths[depot][depot][aa[0]].end());
-            for(int i = 0; i < aa.size() - 1; i++){
-                pp.insert(pp.end(), paths[depot][aa[i]][aa[i+1]].begin(), paths[depot][aa[i]][aa[i+1]].end());
-            }
-            pp.insert(pp.end(), paths[depot][aa[aa.size() - 1]][depot].begin(), paths[depot][aa[aa.size() - 1]][depot].end());
-        }
-    }
-    return pp;
+void POI::setGraph(Graph *graph) {
+    this->graph = graph;
+}
+
+std::unordered_map<Node *, double> &POI::getAssociatedClients(Node * depot) {
+    return association[depot];
+}
+
+std::unordered_map<Node *, std::unordered_map<Node *, double>> &POI::getCostFunction(Node * depot) {
+    return costFunctions[depot];
+}
+
+std::unordered_map<Node *, std::unordered_map<Node *, std::vector<Edge *>>> &POI::getPaths(Node * depot) {
+    return paths[depot];
 }

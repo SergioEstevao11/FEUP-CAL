@@ -27,8 +27,8 @@ public:
     BiDijkstra(Graph * graph);
     double run(Node * orig, Node* dest);
     std::vector<Edge *> getPath(Node * source, Node * dist);
-    std::vector<Edge*> getTraceForward(){return traceForward;};
-    std::vector<Edge*> getTraceBackward(){return traceBackward;};
+    std::vector<Edge*> &getTraceForward(){return traceForward;};
+    std::vector<Edge*> &getTraceBackward(){return traceBackward;};
 };
 
 
