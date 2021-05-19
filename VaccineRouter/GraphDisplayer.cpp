@@ -121,19 +121,11 @@ void GraphDisplayer::highlightPOI(unordered_map<Node*,double> &clients, vector<N
     }
 }
 
-void GraphDisplayer::highlightPath(std::vector<Edge *> path) {
-    for(auto &e : path){
-        gvEdge &edge = gv.getEdge(graph->getEdgeId(e));
-        edge.setColor(GraphViewer::RED);
-        edge.setThickness(5);
-    }
-
-    /*gv.setEnabledNodes(false); // Disable node drawing
-    gv.setEnabledEdgesText(false); // Disable edge text drawing
-    gv.setZipEdges(true);*/
+void GraphDisplayer::highlightPath(std::vector<Edge *> &path) {
+    highlightEdges(path, GraphViewer::RED);
 }
 
-void GraphDisplayer::traceAnimation(vector<Edge*> trace) {
+void GraphDisplayer::traceAnimation(vector<Edge*> &trace) {
     usleep(1000000);
     for(auto & e : trace){
         gv.lock();
