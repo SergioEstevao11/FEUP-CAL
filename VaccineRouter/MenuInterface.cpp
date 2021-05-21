@@ -120,13 +120,14 @@ void MenuInterface::animationMenu() {
 }
 
 void MenuInterface::pathMenu() {
-    GraphDisplayer gd(manager->getGraph());
     drawPathsAlgorithmsMenu();
     int option = readOption(1,3);
+    GraphDisplayer gd(manager->getGraph());
     vector<Edge*> path;
     unsigned int time = 3;
-    manager->getPath(option, time, path, 11396, 11320);
+    double distance = manager->getPath(option, time, path, 11396, 11320);
     cout << "Path calculated in: " << time << "ms." << endl;
+    cout << "Distance between points is: "<<  distance << endl;
     gd.highlightPath(path);
     gd.display();
     gd.join();
@@ -143,7 +144,16 @@ void MenuInterface::poiMenu() {
 }
 
 void MenuInterface::routesMenu() {
-
+    GraphDisplayer gd(manager->getGraph());
+    vector<vector<vector<Edge*>>> routes;
+    manager->getRoutes(routes);
+    vector<Node*> depots;
+    unordered_map<Node*, double> clients;
+    manager->getPOI(depots,clients);
+    gd.highlightPOI(clients, depots);
+    gd.highlightRoutes(routes);
+    gd.display();
+    gd.join();
 }
 
 
