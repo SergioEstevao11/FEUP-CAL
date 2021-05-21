@@ -19,20 +19,20 @@ Manager::Manager(string nodes, string edges, string depots, string clients) {
     poi.readClients(clients);
 }
 
-double Manager::getPath(char algorithm, unsigned int &time, vector<Edge *> &path,
+double Manager::getPath(int algorithm, unsigned int &time, vector<Edge *> &path,
                                                         unsigned int source, unsigned int dest) {
-    if(algorithm == 'd'){
+    if(algorithm == 1){
         Dijkstra dijkstra(&graph);
         dijkstra.run(graph.getNode(source));
         return dijkstra.getPath(graph.getNode(source), graph.getNode(dest), path);
     }
-    else if (algorithm == 'b') {
+    else if (algorithm == 2) {
         BiDijkstra biDijkstra(&graph);
         double dist = biDijkstra.run(graph.getNode(source), graph.getNode(dest));
         path = biDijkstra.getPath(graph.getNode(source), graph.getNode(dest));
         return dist;
     }
-    else if (algorithm == 'a') {
+    else if (algorithm == 3) {
         AStar aStar(&graph);
         double dist = aStar.run(graph.getNode(source), graph.getNode(dest));
         path = aStar.getPath(graph.getNode(source), graph.getNode(dest));
@@ -46,20 +46,20 @@ void Manager::getPOI(vector<Node *> &depots, unordered_map<Node *, double> &clie
     clients = poi.getClients();
 }
 
-void Manager::getTrace(char algorithm, vector<Edge *> &forward, vector<Edge *> &backward,
+void Manager::getTrace(int algorithm, vector<Edge *> &forward, vector<Edge *> &backward,
                                                                 unsigned int source, unsigned int dest) {
-    if(algorithm == 'd'){
+    if(algorithm == 1){
         Dijkstra dijkstra(&graph);
         dijkstra.run(graph.getNode(source));
         forward = dijkstra.getTrace();
     }
-    else if (algorithm == 'b') {
+    else if (algorithm == 2) {
         BiDijkstra biDijkstra(&graph);
         biDijkstra.run(graph.getNode(source), graph.getNode(dest));
         forward = biDijkstra.getTraceForward();
         backward = biDijkstra.getTraceBackward();
     }
-    else if (algorithm == 'a') {
+    else if (algorithm == 3) {
         AStar aStar(&graph);
         aStar.run(graph.getNode(source), graph.getNode(dest));
         forward =aStar.getTrace();

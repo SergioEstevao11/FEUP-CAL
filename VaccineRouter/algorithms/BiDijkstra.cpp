@@ -95,12 +95,10 @@ std::vector<Edge *> BiDijkstra::getPath(Node *source, Node *dest) {
         edgePath.push_back(pathf[it]);
         it = pathf[it]->getBegin();
     }
-    cout << it->getId() << endl;
     it = midPoint;
     while(pathb[it] != nullptr){
         edgePath.push_back(pathb[it]);
         it = pathb[it]->getEnd();
     }
-    cout << it->getId() << endl;
     return edgePath;
 }

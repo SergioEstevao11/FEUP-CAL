@@ -48,7 +48,7 @@ void GraphDisplayer::setDefaultColor(){
     }
 }
 
-void GraphDisplayer::highlightEdges(std::vector<Edge*> path, const sf::Color &color){
+void GraphDisplayer::highlightEdges(std::vector<Edge*> &path, const sf::Color &color){
     for(auto &e : path){
         gvEdge &edge = gv.getEdge(graph->getEdgeId(e));
         edge.setColor(color);
@@ -56,55 +56,8 @@ void GraphDisplayer::highlightEdges(std::vector<Edge*> path, const sf::Color &co
     }
 }
 
-void GraphDisplayer::highlightEdges(std::vector<GraphViewer::id_t> path, const sf::Color &color){
-    for(auto &id : path){
-        auto e = gv.getEdge(id);
-        e.setColor(color);
-    }
-}
-
-void GraphDisplayer::highLightNodes(std::vector<GraphViewer::id_t> nodes, const sf::Color &color){
-    for(auto &id : nodes){
-        auto n = gv.getNode(id);
-        n.setColor(color);
-    }
-}
-
-void GraphDisplayer::display(std::vector<std::vector<Edge*>> paths) {
-    /*
-    gv.setScale(7.5);
-    gv.setCenter(sf::Vector2f(2500, 0));
-    for(auto &v : graph->getNodes()){
-        gvNode &node = gv.addNode(v->getId(), sf::Vector2f(v->getX(), v->getY()));
-        node.setOutlineThickness(0.0);
-        node.setSize(5.0);
-        node.setColor(GraphViewer::RED);
-    }
-    for(auto &e : graph->getEdges()){
-        gvEdge &edge = gv.addEdge(e.first, gv.getNode(e.second->getBegin()->getId()), gv.getNode(e.second->getEnd()->getId()));
-        edge.setThickness(1);
-        edge.setColor(GraphViewer::BLACK);
-    }*/
-
-
-
-    gv.setEnabledNodes(true); // Disable node drawing
-    gv.setEnabledEdgesText(false); // Disable edge text drawing
-    gv.setZipEdges(false);
-
-    gv.createWindow(1600, 900);
-    gv.join();
-
-}
-
 void GraphDisplayer::display(){
-
-    /*gv.setEnabledNodes(true); // Disable node drawing
-    gv.setEnabledEdgesText(false); // Disable edge text drawing
-    gv.setZipEdges(false);*/
-
     gv.createWindow(1600, 900);
-    gv.join();
 }
 
 void GraphDisplayer::highlightPOI(unordered_map<Node*,double> &clients, vector<Node *> &depot) {
@@ -125,22 +78,9 @@ void GraphDisplayer::highlightPath(std::vector<Edge *> &path) {
     highlightEdges(path, GraphViewer::RED);
 }
 
-void GraphDisplayer::traceAnimation(vector<Edge*> &trace) {
+void GraphDisplayer::traceAnimation(std::vector<Edge *> &traceF, std::vector<Edge *> &traceB) {
     usleep(1000000);
-    for(auto & e : trace){
-        gv.lock();
-        gvEdge &edge = gv.getEdge(graph->getEdgeId(e));
-        edge.setColor(GraphViewer::RED);
-        edge.setThickness(5.0);
-        gv.unlock();
-        usleep(100);
-    }
-    gv.join();
-}
-
-void GraphDisplayer::biTraceAnimation(std::vector<Edge *> &traceF, std::vector<Edge *> &traceB) {
-    usleep(1000000);
-    for(auto it1 = traceF.begin(), it2 = traceB.begin(); it1 != traceF.end() && it2 != traceB.end();){
+    for(auto it1 = traceF.begin(), it2 = traceB.begin(); it1 != traceF.end() || it2 != traceB.end();){
         gv.lock();
         if(it1 != traceF.end()){
             gvEdge &edge = gv.getEdge(graph->getEdgeId(*(it1)));
@@ -159,7 +99,6 @@ void GraphDisplayer::biTraceAnimation(std::vector<Edge *> &traceF, std::vector<E
         gv.unlock();
         usleep(100);
     }
-    gv.join();
 }
 
 void GraphDisplayer::highlightRoutes(vector<std::vector<std::vector<Edge *>>> &routes) {
@@ -169,5 +108,9 @@ void GraphDisplayer::highlightRoutes(vector<std::vector<std::vector<Edge *>>> &r
         }
     }
 
+}
+
+void GraphDisplayer::join() {
+    gv.join();
 }
 
