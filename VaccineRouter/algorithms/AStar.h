@@ -18,13 +18,15 @@ private:
     std::unordered_map<Node*, bool> visited;
     std::unordered_map<Node *, double> heuristic;
     std::vector<Edge*> trace;
+    unsigned int executionTime;
     void setup(Node * dest);
 
 public:
     AStar(Graph * g);
     double run(Node* orig, Node* dest);
     std::vector<Edge *> getPath(Node * source, Node * dist);
-    std::vector<Edge*> getTrace(){return trace;};
+    std::vector<Edge*> getTrace();
+    unsigned int getExecutionTime();
 };
 
 

@@ -4,6 +4,10 @@
 
 #include "Tarjan.h"
 
+#include <chrono>
+
+typedef std::chrono::high_resolution_clock hrc;
+
 using namespace std;
 
 Tarjan::Tarjan(Graph *graph) {
@@ -18,12 +22,15 @@ void Tarjan::setup() {
 }
 
 void Tarjan::run() {
+    auto startTime = hrc::now();
     setup();
     for(auto &node : graph->nodes){
         if(id[node] == -1){
             strongComponent(node);
         }
     }
+    auto finishTime = hrc::now();
+    executionTime = chrono::duration_cast<std::chrono::milliseconds>(finishTime - startTime).count();
 }
 
 void Tarjan::strongComponent(Node *node) {
@@ -53,4 +60,8 @@ void Tarjan::strongComponent(Node *node) {
 
 std::unordered_map<Node *, Node *> Tarjan::getSCC() {
     return SCC;
+}
+
+unsigned int Tarjan::getExecutionTime() {
+    return executionTime;
 }

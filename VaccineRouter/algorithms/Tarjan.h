@@ -19,12 +19,14 @@ private:
     std::unordered_map<Node*,bool> onStack;
     std::stack<Node*> stack;
     int index;
+    unsigned int executionTime;
     void setup();
     void strongComponent(Node * node);
 public:
     Tarjan(Graph * graph);
     void run();
     std::unordered_map<Node*,Node*> getSCC();
+    unsigned int getExecutionTime();
 };
 
 

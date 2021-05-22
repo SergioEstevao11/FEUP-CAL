@@ -3,12 +3,17 @@
 //
 
 #include "Manager.h"
+
+#include <chrono>
+
 #include "graph/GraphReader.h"
 #include "algorithms/BiDijkstra.h"
 #include "algorithms/AStar.h"
 #include "algorithms/ClarkeWright.h"
 #include "algorithms/Kosaraju.h"
 #include "algorithms/Tarjan.h"
+
+typedef std::chrono::high_resolution_clock hrc;
 
 using namespace std;
 
@@ -26,17 +31,20 @@ double Manager::getPath(int algorithm, unsigned int &time, vector<Edge *> &path,
     if(algorithm == 1){
         Dijkstra dijkstra(&graph);
         dijkstra.run(source);
+        time = dijkstra.getExecutionTime();
         return dijkstra.getPath(source, dest, path);
     }
     else if (algorithm == 2) {
         BiDijkstra biDijkstra(&graph);
         double dist = biDijkstra.run(source, dest);
+        time = biDijkstra.getExecutionTime();
         path = biDijkstra.getPath(source, dest);
         return dist;
     }
     else if (algorithm == 3) {
         AStar aStar(&graph);
         double dist = aStar.run(source, dest);
+        time = aStar.getExecutionTime();
         path = aStar.getPath(source, dest);
         return dist;
     }
@@ -68,7 +76,8 @@ void Manager::getTrace(int algorithm, vector<Edge *> &forward, vector<Edge *> &b
     }
 }
 
-void Manager::getRoutes(vector<vector<vector<Edge *>>> &routes) {
+void Manager::getRoutes(vector<vector<vector<Edge *>>> &routes, unsigned int &time) {
+    auto startTime = hrc::now();
     poi.preProcess();
     vector<Node*> depots = poi.getDepots();
     for(auto & depot : depots){
@@ -92,20 +101,24 @@ void Manager::getRoutes(vector<vector<vector<Edge *>>> &routes) {
         }
         routes.push_back(depotRoutes);
     }
+    auto finishTime = hrc::now();
+    time = chrono::duration_cast<std::chrono::milliseconds>(finishTime - startTime).count();
 }
 
 Graph *Manager::getGraph() {
     return &graph;
 }
 
-void Manager::getSCC(int algorithm, std::unordered_map<Node *, Node *> &scc) {
+void Manager::getSCC(int algorithm, std::unordered_map<Node *, Node *> &scc, unsigned int &time) {
     if(algorithm == 1){
         Kosaraju kosaraju(&graph);
         kosaraju.run();
+        time = kosaraju.getExecutionTime();
         scc = kosaraju.getSCC();
     } else if(algorithm == 2){
         Tarjan tarjan(&graph);
         tarjan.run();
+        time = tarjan.getExecutionTime();
         scc = tarjan.getSCC();
     }
 }

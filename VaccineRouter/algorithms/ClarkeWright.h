@@ -31,6 +31,7 @@ private:
     std::unordered_set<Route*> finalRoutes;
     double maxT;
     double maxQ;
+    unsigned int executionTime;
     void sortSavings();
     void calculateSavings();
     void makeInitialRoutes();
@@ -39,9 +40,10 @@ public:
                  std::unordered_map<Node *,double> order,
                  std::unordered_map<Node *, std::unordered_map<Node*,double>> costFunction,
                  double maxT, double maxQ);
-    ~ClarkeWright();
     void run();
     std::unordered_set<Route*> getRoutes(){return finalRoutes;};
+    unsigned int getExecutionTime();
+    ~ClarkeWright();
 };
 
 

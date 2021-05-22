@@ -15,9 +15,9 @@ public:
     void getPOI(std::vector<Node*> &depots, std::unordered_map<Node*,double> &clients);
     void getTrace(int algorithm, std::vector<Edge*> &forward, std::vector<Edge*> &backward,
                                                     Node * source, Node * dest);
-    void getRoutes(std::vector<std::vector<std::vector<Edge*>>> &routes);
+    void getRoutes(std::vector<std::vector<std::vector<Edge*>>> &routes, unsigned int &time);
 
-    void getSCC(int algorithm, std::unordered_map<Node*, Node*> &scc);
+    void getSCC(int algorithm, std::unordered_map<Node*, Node*> &scc, unsigned int &time);
 };
 
 

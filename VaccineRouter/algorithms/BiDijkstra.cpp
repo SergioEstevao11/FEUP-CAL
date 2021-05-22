@@ -5,7 +5,9 @@
 #include "BiDijkstra.h"
 
 #include <queue>
-#include <iostream>
+#include <chrono>
+
+typedef std::chrono::high_resolution_clock hrc;
 
 using namespace std;
 
@@ -25,6 +27,7 @@ void BiDijkstra::setup() {
 }
 
 double BiDijkstra::run(Node *orig, Node *dest) {
+    auto startTime = hrc::now();
     setup();
     priority_queue<pair<double, Node*>> qf;
     qf.push(make_pair(0, orig));
@@ -42,6 +45,8 @@ double BiDijkstra::run(Node *orig, Node *dest) {
         Node * nf = qf.top().second; qf.pop();
         Node * nb = qb.top().second; qb.pop();
         if(distForward[nf] + distBackward[nb] >= minDist){
+            auto finishTime = hrc::now();
+            executionTime = chrono::duration_cast<std::chrono::milliseconds>(finishTime - startTime).count();
             return minDist;
         }
         if(!visitedForward[nf]){
@@ -84,7 +89,8 @@ double BiDijkstra::run(Node *orig, Node *dest) {
             visitedBackward[nb] = true;
         }
     }
-
+    auto finishTime = hrc::now();
+    executionTime = chrono::duration_cast<std::chrono::milliseconds>(finishTime - startTime).count();
     return Graph::INF;
 }
 
@@ -101,4 +107,8 @@ std::vector<Edge *> BiDijkstra::getPath(Node *source, Node *dest) {
         it = pathb[it]->getEnd();
     }
     return edgePath;
+}
+
+unsigned int BiDijkstra::getExecutionTime() {
+    return executionTime;
 }

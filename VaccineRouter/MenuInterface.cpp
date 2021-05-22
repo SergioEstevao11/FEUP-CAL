@@ -133,9 +133,9 @@ void MenuInterface::pathDisplay() {
             vector<Edge*> path;
             Node * source = nodeChoice(true);
             Node * dest = nodeChoice(false);
-            unsigned int time = 3;
+            unsigned int time;
             double distance = manager->getPath(option, time, path, source, dest);
-            cout << "Path calculated in: " << time << "ms." << endl;
+            cout << "Algorithm ran in: " << time << "ms." << endl;
             cout << "Distance between points is: "<<  distance << endl;
             gd.highlightPath(path);
             gd.display();
@@ -157,7 +157,9 @@ void MenuInterface::poiDisplay() {
 void MenuInterface::routesDisplay() {
     GraphDisplayer gd(manager->getGraph());
     vector<vector<vector<Edge*>>> routes;
-    manager->getRoutes(routes);
+    unsigned int time;
+    manager->getRoutes(routes,time);
+    cout << "Algorithm ran in: " << time << " ms."<< endl;
     vector<Node*> depots;
     unordered_map<Node*, double> clients;
     manager->getPOI(depots,clients);
@@ -205,7 +207,9 @@ void MenuInterface::sccDisplay() {
             GraphDisplayer gd(manager->getGraph());
             Node * source = nodeChoice(true);
             unordered_map<Node *, Node *> scc;
-            manager->getSCC(option, scc);
+            unsigned int time;
+            manager->getSCC(option, scc,time);
+            cout << "Algorithm ran in: " << time << "ms." << endl;
             gd.highlightSCCNodes(scc, source);
             gd.display();
             gd.join();

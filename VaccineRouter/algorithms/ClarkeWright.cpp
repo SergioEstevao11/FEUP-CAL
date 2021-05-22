@@ -5,7 +5,6 @@
 #include "ClarkeWright.h"
 
 #include <algorithm>
-#include <iostream>
 
 using namespace std;
 

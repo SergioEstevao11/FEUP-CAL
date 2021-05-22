@@ -25,6 +25,7 @@ void Dijkstra::setup() {
 }
 
 void Dijkstra::run(Node *node) {
+    auto startTime = hrc::now();
     setup();
     priority_queue<pair<double, Node*>> q;
     q.push(make_pair(0, node));
@@ -45,6 +46,8 @@ void Dijkstra::run(Node *node) {
             trace.push_back(edge);
         }
     }
+    auto finishTime = hrc::now();
+    executionTime = chrono::duration_cast<std::chrono::milliseconds>(finishTime - startTime).count();
 }
 
 double Dijkstra::getPath(Node *source, Node *dest, vector<Edge *> &retPath) {
@@ -58,4 +61,12 @@ double Dijkstra::getPath(Node *source, Node *dest, vector<Edge *> &retPath) {
     }
     retPath = edgePath;
     return dist;
+}
+
+std::vector<Edge *> Dijkstra::getTrace() {
+    return trace;
+}
+
+unsigned int Dijkstra::getExecutionTime() {
+    return executionTime;
 }

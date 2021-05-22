@@ -16,6 +16,7 @@ private:
     std::unordered_map<Node*,Node*> SCC;
     std::unordered_map<Node*,bool> visited;
     std::stack<Node*> stack;
+    unsigned int executionTime;
     void setup();
     void DFSFirst(Node * node);
     void DFSAssign(Node * node, Node * component);
@@ -23,6 +24,7 @@ public:
     Kosaraju(Graph * graph);
     void run();
     std::unordered_map<Node*,Node*> getSCC();
+    unsigned int getExecutionTime();
 
 };
 

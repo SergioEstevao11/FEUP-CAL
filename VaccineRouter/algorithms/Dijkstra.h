@@ -19,13 +19,14 @@ private:
     std::unordered_map<Node *, Edge *> path;
     std::unordered_map<Node*, bool> visited;
     std::vector<Edge*> trace;
+    unsigned int executionTime;
     void setup();
-
 public:
     Dijkstra(Graph * g);
     void run(Node* node);
     double getPath(Node * source, Node * dist, std::vector<Edge *> &retPath);
-    std::vector<Edge*> getTrace(){return trace;};
+    std::vector<Edge*> getTrace();
+    unsigned int getExecutionTime();
 };
 
 

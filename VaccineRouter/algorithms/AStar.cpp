@@ -5,6 +5,9 @@
 #include "AStar.h"
 
 #include <queue>
+#include <chrono>
+
+typedef std::chrono::high_resolution_clock hrc;
 
 using namespace std;
 
@@ -22,6 +25,7 @@ void AStar::setup(Node * dest) {
 }
 
 double AStar::run(Node *orig, Node *dest) {
+    auto startTime = hrc::now();
     setup(dest);
     priority_queue<pair<double, Node*>> q;
     q.push(make_pair(0 - heuristic[orig], orig));
@@ -30,7 +34,11 @@ double AStar::run(Node *orig, Node *dest) {
     while(!q.empty()){
         Node * out = q.top().second; q.pop();
         if(visited[out]) continue;
-        if(out == dest) return dist[dest];
+        if(out == dest) {
+            auto finishTime = hrc::now();
+            executionTime = chrono::duration_cast<std::chrono::milliseconds>(finishTime - startTime).count();
+            return dist[dest];
+        }
         visited[out] = true;
         for(auto &edge : graph->adjList[out]){
             Node * in = edge->getEnd();
@@ -43,7 +51,8 @@ double AStar::run(Node *orig, Node *dest) {
             trace.push_back(edge);
         }
     }
-
+    auto finishTime = hrc::now();
+    executionTime = chrono::duration_cast<std::chrono::milliseconds>(finishTime - startTime).count();
     return Graph::INF;
 }
 
@@ -55,4 +64,12 @@ std::vector<Edge *> AStar::getPath(Node *source, Node *dest) {
         it = path[it]->getBegin();
     }
     return edgePath;
+}
+
+std::vector<Edge *> AStar::getTrace() {
+    return trace;
+}
+
+unsigned int AStar::getExecutionTime() {
+    return executionTime;
 }

@@ -1,8 +1,13 @@
 //
 // Created by rodrigo on 10/05/2021.
 //
-
 #include "Kosaraju.h"
+
+#include <chrono>
+
+typedef std::chrono::high_resolution_clock hrc;
+
+using namespace std;
 
 Kosaraju::Kosaraju(Graph * graph) {
     this->graph = graph;
@@ -16,6 +21,7 @@ void Kosaraju::setup() {
 }
 
 void Kosaraju::run() {
+    auto startTime = hrc::now();
     setup();
     for(auto &node : graph->nodes){
         DFSFirst(node);
@@ -24,6 +30,8 @@ void Kosaraju::run() {
         Node * node = stack.top(); stack.pop();
         DFSAssign(node,node);
     }
+    auto finishTime = hrc::now();
+    executionTime = chrono::duration_cast<std::chrono::milliseconds>(finishTime - startTime).count();
 }
 
 void Kosaraju::DFSFirst(Node * node) {
@@ -47,4 +55,8 @@ void Kosaraju::DFSAssign(Node * node, Node * component) {
 
 std::unordered_map<Node *, Node *> Kosaraju::getSCC() {
     return SCC;
+}
+
+unsigned int Kosaraju::getExecutionTime() {
+    return executionTime;
 }

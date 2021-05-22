@@ -22,6 +22,7 @@ private:
     std::unordered_map<Node*, bool> visitedBackward;
     std::vector<Edge*> traceForward;
     std::vector<Edge*> traceBackward;
+    unsigned int executionTime;
     void setup();
 public:
     BiDijkstra(Graph * graph);
@@ -29,6 +30,7 @@ public:
     std::vector<Edge *> getPath(Node * source, Node * dist);
     std::vector<Edge*> &getTraceForward(){return traceForward;};
     std::vector<Edge*> &getTraceBackward(){return traceBackward;};
+    unsigned int getExecutionTime();
 };
 
 
