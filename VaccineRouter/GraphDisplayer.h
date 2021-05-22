@@ -18,8 +18,7 @@ public:
     void display();
     void join();
     void setDefaultColor();
-    void highlightEdges(std::vector<Edge*> &path, const sf::Color &color); //provavelmente não funciona
-    //////////////////////////
+    void highlightEdges(std::vector<Edge*> &path, const sf::Color &color);
     void highlightPOI(std::unordered_map<Node *, double> &clients, std::vector<Node*> &depot);
     void highlightPath(std::vector<Edge*> &path);
     void highlightRoutes(std::vector<std::vector<std::vector<Edge*>>> &routes);
