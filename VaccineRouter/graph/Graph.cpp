@@ -54,7 +54,10 @@ void Graph::addEdge(Edge *edge) {
 }
 
 Node *Graph::getNode(unsigned int id) {
-    return nodeMap[id];
+    if(nodeMap.find(id) != nodeMap.end())
+        return nodeMap[id];
+
+    return nullptr;
 }
 
 

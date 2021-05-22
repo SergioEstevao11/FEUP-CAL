@@ -50,3 +50,7 @@ void Tarjan::strongComponent(Node *node) {
         }
     }
 }
+
+std::unordered_map<Node *, Node *> Tarjan::getSCC() {
+    return SCC;
+}

@@ -44,3 +44,7 @@ void Kosaraju::DFSAssign(Node * node, Node * component) {
         DFSAssign(edge->getBegin(), component);
     }
 }
+
+std::unordered_map<Node *, Node *> Kosaraju::getSCC() {
+    return SCC;
+}

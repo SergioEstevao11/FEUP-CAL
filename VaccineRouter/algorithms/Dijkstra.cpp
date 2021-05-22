@@ -5,6 +5,9 @@
 #include "Dijkstra.h"
 
 #include <queue>
+#include <chrono>
+
+typedef std::chrono::high_resolution_clock hrc;
 
 using namespace std;
 

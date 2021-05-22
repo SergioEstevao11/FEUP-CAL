@@ -51,9 +51,8 @@ void MenuInterface::drawPathsAlgorithmsMenu() {
 void MenuInterface::drawSCCAlgorithmsMenu() {
     cout << "       ALGORITHM            " << endl
          <<"=============================" << endl
-         << "Dijkstra                 [1]" << endl
-         << "Bidirectional Dijkstra   [2]" << endl
-         << "A star (A*)              [3]" << endl
+         << "Kosaraju                 [1]" << endl
+         << "Tarjan                   [2]" << endl
          << "Back                     [0]" << endl
          <<"=============================" << endl;
 }
@@ -90,50 +89,62 @@ void MenuInterface::mainMenuStart() {
             }
                 break;
             case 2:
-                poiMenu();
+                poiDisplay();
                 break;
             case 3:
+                sccDisplay();
                 break;
             case 4:
-                routesMenu();
+                routesDisplay();
                 break;
             case 5:
-                pathMenu();
+                pathDisplay();
                 break;
             case 6:
-                animationMenu();
+                animationDisplay();
                 break;
         }
     } while(option != 0);
 }
 
-void MenuInterface::animationMenu() {
-    GraphDisplayer gd(manager->getGraph());
-    drawPathsAlgorithmsMenu();
-    int option = readOption(0,3);
-    vector<Edge*> pathForward;
-    vector<Edge*> pathBackward;
-    manager->getTrace(option, pathForward, pathBackward, 11396, 11320);
-    gd.display();
-    gd.traceAnimation(pathForward, pathBackward);
-    gd.join();
+void MenuInterface::animationDisplay() {
+    int option;
+    do{
+        option = pathsMenu();
+        if(option != 0){
+            GraphDisplayer gd(manager->getGraph());
+            Node * source = nodeChoice(true);
+            Node * dest = (option != 1 ? nodeChoice(false) : nullptr);
+            vector<Edge*> pathForward;
+            vector<Edge*> pathBackward;
+            manager->getTrace(option, pathForward, pathBackward, source, dest);
+            gd.display();
+            gd.traceAnimation(pathForward, pathBackward);
+            gd.join();
+        }
+    }while (option != 0);
+}
+void MenuInterface::pathDisplay() {
+    int option;
+    do{
+        option = pathsMenu();
+        if(option != 0){
+            GraphDisplayer gd(manager->getGraph());
+            vector<Edge*> path;
+            Node * source = nodeChoice(true);
+            Node * dest = nodeChoice(false);
+            unsigned int time = 3;
+            double distance = manager->getPath(option, time, path, source, dest);
+            cout << "Path calculated in: " << time << "ms." << endl;
+            cout << "Distance between points is: "<<  distance << endl;
+            gd.highlightPath(path);
+            gd.display();
+            gd.join();
+        }
+    } while(option != 0);
 }
 
-void MenuInterface::pathMenu() {
-    drawPathsAlgorithmsMenu();
-    int option = readOption(1,3);
-    GraphDisplayer gd(manager->getGraph());
-    vector<Edge*> path;
-    unsigned int time = 3;
-    double distance = manager->getPath(option, time, path, 11396, 11320);
-    cout << "Path calculated in: " << time << "ms." << endl;
-    cout << "Distance between points is: "<<  distance << endl;
-    gd.highlightPath(path);
-    gd.display();
-    gd.join();
-}
-
-void MenuInterface::poiMenu() {
+void MenuInterface::poiDisplay() {
     GraphDisplayer gd(manager->getGraph());
     vector<Node*> depots;
     unordered_map<Node*, double> clients;
@@ -143,7 +154,7 @@ void MenuInterface::poiMenu() {
     gd.join();
 }
 
-void MenuInterface::routesMenu() {
+void MenuInterface::routesDisplay() {
     GraphDisplayer gd(manager->getGraph());
     vector<vector<vector<Edge*>>> routes;
     manager->getRoutes(routes);
@@ -155,5 +166,52 @@ void MenuInterface::routesMenu() {
     gd.display();
     gd.join();
 }
+
+int MenuInterface::pathsMenu() {
+    drawPathsAlgorithmsMenu();
+    return readOption(0,3);
+}
+
+Node *MenuInterface::nodeChoice(bool isSource) {
+    Node * node = nullptr;
+    unsigned int userChoice;
+    do{
+        cout << "Choose a " << (isSource ? "source" : "destiny") << " node: ";
+        if(cin >> userChoice){
+            cin.ignore(1000, '\n');
+            node = manager->getGraph()->getNode(userChoice);
+            if(node == nullptr) {
+                cerr << endl
+                     << "Nonexistent node. Please try again:" << endl
+                     << endl;
+            }
+        } else {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cerr << endl
+                 << "Invalid input. Please try again:" << endl
+                 << endl;
+        }
+    } while(node == nullptr);
+    return node;
+}
+
+void MenuInterface::sccDisplay() {
+    int option;
+    do{
+        drawSCCAlgorithmsMenu();
+        option = readOption(0,2);
+        if(option != 0){
+            GraphDisplayer gd(manager->getGraph());
+            Node * source = nodeChoice(true);
+            unordered_map<Node *, Node *> scc;
+            manager->getSCC(option, scc);
+            gd.highlightSCCNodes(scc, source);
+            gd.display();
+            gd.join();
+        }
+    } while(option != 0);
+}
+
 
 

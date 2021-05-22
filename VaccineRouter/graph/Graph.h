@@ -42,11 +42,5 @@ public:
 
     std::unordered_set<Node*> getNodes() {return nodes;};
     std::unordered_map<Edge*, unsigned int> getEdges() {return edgeMap;};
-
-
-
-    //ONLY FOR TESTING
-    unsigned numNodes() { return nodes.size();};
-    unsigned numEdges() { int c = 0; for(auto & node : nodes){c += adjList[node].size();} return c;};
 };
 #endif //VACCINEROUTER_GRAPH_H

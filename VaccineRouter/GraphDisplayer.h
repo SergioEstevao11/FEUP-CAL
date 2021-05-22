@@ -22,6 +22,7 @@ public:
     void highlightPOI(std::unordered_map<Node *, double> &clients, std::vector<Node*> &depot);
     void highlightPath(std::vector<Edge*> &path);
     void highlightRoutes(std::vector<std::vector<std::vector<Edge*>>> &routes);
+    void highlightSCCNodes(std::unordered_map<Node *, Node*> &scc, Node * node);
     void traceAnimation(std::vector<Edge*> &traceForward, std::vector<Edge*> &traceBackward);
 };
 

@@ -13,7 +13,7 @@
 class Tarjan {
 private:
     Graph * graph;
-    //std::unordered_map<Node*,Node*> SCC;
+    std::unordered_map<Node*,Node*> SCC;
     std::unordered_map<Node*,int> id;
     std::unordered_map<Node*,int> lowLink;
     std::unordered_map<Node*,bool> onStack;
@@ -22,9 +22,9 @@ private:
     void setup();
     void strongComponent(Node * node);
 public:
-    std::unordered_map<Node*,Node*> SCC;
     Tarjan(Graph * graph);
     void run();
+    std::unordered_map<Node*,Node*> getSCC();
 };
 
 

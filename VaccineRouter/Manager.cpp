@@ -7,6 +7,8 @@
 #include "algorithms/BiDijkstra.h"
 #include "algorithms/AStar.h"
 #include "algorithms/ClarkeWright.h"
+#include "algorithms/Kosaraju.h"
+#include "algorithms/Tarjan.h"
 
 using namespace std;
 
@@ -20,22 +22,22 @@ Manager::Manager(string nodes, string edges, string depots, string clients) {
 }
 
 double Manager::getPath(int algorithm, unsigned int &time, vector<Edge *> &path,
-                                                        unsigned int source, unsigned int dest) {
+                                                        Node * source, Node * dest) {
     if(algorithm == 1){
         Dijkstra dijkstra(&graph);
-        dijkstra.run(graph.getNode(source));
-        return dijkstra.getPath(graph.getNode(source), graph.getNode(dest), path);
+        dijkstra.run(source);
+        return dijkstra.getPath(source, dest, path);
     }
     else if (algorithm == 2) {
         BiDijkstra biDijkstra(&graph);
-        double dist = biDijkstra.run(graph.getNode(source), graph.getNode(dest));
-        path = biDijkstra.getPath(graph.getNode(source), graph.getNode(dest));
+        double dist = biDijkstra.run(source, dest);
+        path = biDijkstra.getPath(source, dest);
         return dist;
     }
     else if (algorithm == 3) {
         AStar aStar(&graph);
-        double dist = aStar.run(graph.getNode(source), graph.getNode(dest));
-        path = aStar.getPath(graph.getNode(source), graph.getNode(dest));
+        double dist = aStar.run(source, dest);
+        path = aStar.getPath(source, dest);
         return dist;
     }
     return Graph::INF;
@@ -47,21 +49,21 @@ void Manager::getPOI(vector<Node *> &depots, unordered_map<Node *, double> &clie
 }
 
 void Manager::getTrace(int algorithm, vector<Edge *> &forward, vector<Edge *> &backward,
-                                                                unsigned int source, unsigned int dest) {
+                                                                Node * source, Node * dest) {
     if(algorithm == 1){
         Dijkstra dijkstra(&graph);
-        dijkstra.run(graph.getNode(source));
+        dijkstra.run(source);
         forward = dijkstra.getTrace();
     }
     else if (algorithm == 2) {
         BiDijkstra biDijkstra(&graph);
-        biDijkstra.run(graph.getNode(source), graph.getNode(dest));
+        biDijkstra.run(source,dest);
         forward = biDijkstra.getTraceForward();
         backward = biDijkstra.getTraceBackward();
     }
     else if (algorithm == 3) {
         AStar aStar(&graph);
-        aStar.run(graph.getNode(source), graph.getNode(dest));
+        aStar.run(source, dest);
         forward =aStar.getTrace();
     }
 }
@@ -95,3 +97,16 @@ void Manager::getRoutes(vector<vector<vector<Edge *>>> &routes) {
 Graph *Manager::getGraph() {
     return &graph;
 }
+
+void Manager::getSCC(int algorithm, std::unordered_map<Node *, Node *> &scc) {
+    if(algorithm == 1){
+        Kosaraju kosaraju(&graph);
+        kosaraju.run();
+        scc = kosaraju.getSCC();
+    } else if(algorithm == 2){
+        Tarjan tarjan(&graph);
+        tarjan.run();
+        scc = tarjan.getSCC();
+    }
+}
+

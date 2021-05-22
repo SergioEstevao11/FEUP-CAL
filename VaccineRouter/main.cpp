@@ -1,6 +1,11 @@
 #include "MenuInterface.h"
+#include "graph/GraphReader.h"
+#include "algorithms/Kosaraju.h"
+#include "algorithms/Tarjan.h"
 
 #include <chrono>
+#include <iostream>
+
 typedef std::chrono::high_resolution_clock hrc;
 
 using namespace std;

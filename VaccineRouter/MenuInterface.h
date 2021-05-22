@@ -8,11 +8,14 @@ private:
     void drawTitle();
     void drawMainMenu();
     void drawPathsAlgorithmsMenu();
-    void animationMenu();
-    void pathMenu();
-    void poiMenu();
-    void routesMenu();
     void drawSCCAlgorithmsMenu();
+    void animationDisplay();
+    void pathDisplay();
+    void poiDisplay();
+    void routesDisplay();
+    void sccDisplay();
+    int pathsMenu();
+    Node* nodeChoice(bool isSource);
 public:
     MenuInterface(Manager *manager);
     void mainMenuStart();

@@ -13,16 +13,16 @@
 class Kosaraju {
 private:
     Graph * graph;
-    //std::unordered_map<Node*,Node*> SCC;
+    std::unordered_map<Node*,Node*> SCC;
     std::unordered_map<Node*,bool> visited;
     std::stack<Node*> stack;
     void setup();
     void DFSFirst(Node * node);
     void DFSAssign(Node * node, Node * component);
 public:
-    std::unordered_map<Node*,Node*> SCC;
     Kosaraju(Graph * graph);
     void run();
+    std::unordered_map<Node*,Node*> getSCC();
 
 };
 
