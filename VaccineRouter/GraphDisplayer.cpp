@@ -119,7 +119,7 @@ void GraphDisplayer::highlightSCCNodes(unordered_map<Node *, Node *> &scc, Node 
         if(scc[node] == comp.second){
             gvNode &node = gv.getNode(comp.first->getId());
             node.setColor(GraphViewer::RED);
-            node.setSize(50);
+            node.setSize(10);
         }
     }
 }
