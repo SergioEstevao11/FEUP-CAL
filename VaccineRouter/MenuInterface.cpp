@@ -75,9 +75,9 @@ int MenuInterface::readOption(int min, unsigned int max) {
 }
 
 void MenuInterface::mainMenuStart() {
-    drawTitle();
     int option;
     do {
+        drawTitle();
         drawMainMenu();
 
         option = readOption(0,6);

@@ -20,12 +20,48 @@ private:
     std::unordered_map<Node*, bool> visited;
     std::vector<Edge*> trace;
     unsigned int executionTime;
+
+    /**
+     * @brief Assigns the default values
+     */
     void setup();
 public:
+
+    /**
+     * @brief Dijkstra constructor
+     *
+     * @param g Pointer to the graph to be used
+     */
     Dijkstra(Graph * g);
+
+    /**
+     * @brief Executes the algorithm
+     *
+     * @param node Pointer to the node from which the weight is calculated
+     */
     void run(Node* node);
+
+    /**
+     * @brief   Retrieves the path between the nodes source and dist
+     *
+     * @param source source node
+     * @param dist dist node
+     * @return Vector of edge pointers that represent the requested path
+     */
     double getPath(Node * source, Node * dist, std::vector<Edge *> &retPath);
+
+    /**
+     * @brief   Retrieves all the edges traversed by the last execution of the algorithm
+     *
+     * @return  Vector of edge pointers that represent the requested trace
+     */
     std::vector<Edge*> getTrace();
+
+    /**
+     *@brief    Retrieves the time it took complete the previous execution of the algorithm
+     *
+     * @return  Time in milliseconds
+     */
     unsigned int getExecutionTime();
 };
 

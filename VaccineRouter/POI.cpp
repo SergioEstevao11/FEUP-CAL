@@ -141,9 +141,10 @@ void POI::setGraph(Graph *graph) {
     this->graph = graph;
 }
 
-std::unordered_map<Node *, double> &POI::getAssociatedClients(Node * depot) {
+std::unordered_map<Node *, double> & POI::getAssociatedClients(Node * depot) {
     return association[depot];
 }
+
 
 std::unordered_map<Node *, std::unordered_map<Node *, double>> &POI::getCostFunction(Node * depot) {
     return costFunctions[depot];
@@ -152,3 +153,7 @@ std::unordered_map<Node *, std::unordered_map<Node *, double>> &POI::getCostFunc
 std::unordered_map<Node *, std::unordered_map<Node *, std::vector<Edge *>>> &POI::getPaths(Node * depot) {
     return paths[depot];
 }
+
+std::unordered_map<Node*, double> & POI::getClients(){return clients;}
+
+std::vector<Node*> & POI::getDepots(){return depots;}

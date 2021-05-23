@@ -12,9 +12,18 @@ private:
     Node * end;
     double weight;
 public:
+    /**
+     * Initializes the beginning and end node of the edge
+     * @param begin beginning node
+     * @param end finishing node
+     */
     Edge(Node * begin, Node* end);
     Node * getBegin();
     Node * getEnd();
+    /**
+     * Retrieves the weight of the edge
+     * @return weight
+     */
     double getWeight();
 };
 #endif //VACCINEROUTER_EDGE_H

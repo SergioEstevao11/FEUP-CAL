@@ -60,4 +60,8 @@ Node *Graph::getNode(unsigned int id) {
     return nullptr;
 }
 
+unsigned int Graph::getEdgeId(Edge * edge) {return edgeMap[edge];}
 
+std::unordered_set<Node*> Graph::getNodes() {return nodes;}
+
+std::unordered_map<Edge*, unsigned int> Graph::getEdges() {return edgeMap;}

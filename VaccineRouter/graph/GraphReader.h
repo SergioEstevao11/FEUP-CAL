@@ -13,8 +13,20 @@ class GraphReader {
 private:
     Graph * graph;
 public:
+    /**
+     * Initializes the graph where the nodes and edges will be inserted
+     * @param graph
+     */
     GraphReader(Graph * graph);
+    /**
+     * Reads the nodes from a file
+     * @param filename
+     */
     void readNodes(std::string &filename);
+    /**
+     * Reads the edges from a file
+     * @param filename
+     */
     void readEdges(std::string &filename);
 
 };
