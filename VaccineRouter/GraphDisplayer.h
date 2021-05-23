@@ -62,6 +62,17 @@ public:
      * @param traceBackward
      */
     void traceAnimation(std::vector<Edge*> &traceForward, std::vector<Edge*> &traceBackward);
+    /**
+     * @brief Shows the path of the algorithm's execution in a animation
+     * @param path
+     */
+    void pathAnimation(std::vector<Edge*> &path);
+    /**
+     * @brief Highlight a specific node with the parsed color
+     * @param begin
+     * @param color
+     */
+    void highlightNode(Node * node, sf::Color color);
 };
 
 

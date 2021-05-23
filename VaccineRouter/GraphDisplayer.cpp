@@ -64,13 +64,14 @@ void GraphDisplayer::highlightPOI(unordered_map<Node*,double> &clients, vector<N
     for(auto & c : clients){
         gvNode &node = gv.getNode(c.first->getId());
         node.setColor(GraphViewer::ORANGE);
-        node.setSize(50);
+        node.setOutlineThickness(3);
+        node.setSize(40);
     }
 
     for(auto & d : depot){
         gvNode &node = gv.getNode(d->getId());
         node.setColor(GraphViewer::GREEN);
-        node.setSize(50);
+        node.setSize(40);
     }
 }
 
@@ -101,6 +102,16 @@ void GraphDisplayer::traceAnimation(std::vector<Edge *> &traceF, std::vector<Edg
     }
 }
 
+void GraphDisplayer::pathAnimation(std::vector<Edge*> &path){
+    for(auto &e : path){
+        gvEdge &edge = gv.getEdge(graph->getEdgeId(e));
+        edge.setColor(GraphViewer::BLUE);
+        edge.setThickness(5);
+        usleep(20000);
+    }
+}
+
+
 void GraphDisplayer::highlightRoutes(vector<std::vector<std::vector<Edge *>>> &routes) {
     for(auto &depotRoutes : routes){
         for(int i = 0; i < depotRoutes.size(); i++){
@@ -122,5 +133,13 @@ void GraphDisplayer::highlightSCCNodes(unordered_map<Node *, Node *> &scc, Node 
             node.setSize(10);
         }
     }
+}
+
+void GraphDisplayer::highlightNode(Node * node, sf::Color color){
+    if (node == nullptr) return;
+    gvNode &sourceNode = gv.getNode(node->getId());
+    sourceNode.setColor(color);
+    sourceNode.setOutlineThickness(6);
+    sourceNode.setSize(30);
 }
 

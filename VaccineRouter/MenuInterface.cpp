@@ -113,13 +113,19 @@ void MenuInterface::animationDisplay() {
         option = pathsMenu();
         if(option != 0){
             GraphDisplayer gd(manager->getGraph());
+            unsigned int time;
             Node * source = nodeChoice(true);
             Node * dest = (option != 1 ? nodeChoice(false) : nullptr);
             vector<Edge*> pathForward;
             vector<Edge*> pathBackward;
+            vector<Edge*> path;
             manager->getTrace(option, pathForward, pathBackward, source, dest);
+            manager->getPath(option, time, path, source, dest);
+            gd.highlightNode(source, GraphViewer::RED);
+            gd.highlightNode(dest, GraphViewer::GREEN);
             gd.display();
             gd.traceAnimation(pathForward, pathBackward);
+            gd.pathAnimation(path);
             gd.join();
         }
     }while (option != 0);
@@ -137,6 +143,8 @@ void MenuInterface::pathDisplay() {
             double distance = manager->getPath(option, time, path, source, dest);
             cout << "Algorithm ran in: " << time << "ms." << endl;
             cout << "Distance between points is: "<<  distance << endl;
+            gd.highlightNode(source, GraphViewer::RED);
+            gd.highlightNode(dest, GraphViewer::GREEN);
             gd.highlightPath(path);
             gd.display();
             gd.join();
@@ -211,6 +219,7 @@ void MenuInterface::sccDisplay() {
             manager->getSCC(option, scc,time);
             cout << "Algorithm ran in: " << time << "ms." << endl;
             gd.highlightSCCNodes(scc, source);
+            gd.highlightNode(source, GraphViewer::RED);
             gd.display();
             gd.join();
         }
