@@ -11,6 +11,6 @@ set(GRAPHVIEWERCPP_PATH lib/GraphViewerCpp)
 add_subdirectory(${GRAPHVIEWERCPP_PATH})
 include_directories(${GRAPHVIEWERCPP_PATH}/include)
 
-add_executable(VaccineRouter main.cpp graph/Node.h graph/Edge.h graph/Graph.h graph/Edge.cpp graph/Node.cpp graph/Graph.cpp graph/GraphReader.cpp graph/GraphReader.h algorithms/Dijkstra.cpp algorithms/Dijkstra.h algorithms/BiDijkstra.cpp algorithms/BiDijkstra.h algorithms/Kosaraju.cpp algorithms/Kosaraju.h algorithms/Tarjan.cpp algorithms/Tarjan.h algorithms/AStar.cpp algorithms/AStar.h algorithms/ClarkeWright.cpp algorithms/ClarkeWright.h GraphDisplayer.cpp GraphDisplayer.h algorithms/Route.cpp algorithms/Route.h POI.cpp POI.h MenuInterface.cpp MenuInterface.h Manager.cpp Manager.h)
+add_executable(VaccineRouter main.cpp graph/Node.h graph/Edge.h graph/Graph.h graph/Edge.cpp graph/Node.cpp graph/Graph.cpp graph/GraphReader.cpp graph/GraphReader.h algorithms/Dijkstra.cpp algorithms/Dijkstra.h algorithms/BiDijkstra.cpp algorithms/BiDijkstra.h algorithms/Kosaraju.cpp algorithms/Kosaraju.h algorithms/Tarjan.cpp algorithms/Tarjan.h algorithms/AStar.cpp algorithms/AStar.h algorithms/ClarkeWright.cpp algorithms/ClarkeWright.h GraphDisplayer.cpp GraphDisplayer.h structures/Route.cpp structures/Route.h structures/POI.cpp structures/POI.h MenuInterface.cpp MenuInterface.h Manager.cpp Manager.h)
 
 target_link_libraries(VaccineRouter graphviewer)

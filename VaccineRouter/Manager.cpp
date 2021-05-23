@@ -5,6 +5,8 @@
 #include "Manager.h"
 
 #include <chrono>
+#include <fstream>
+#include <iostream>
 
 #include "graph/GraphReader.h"
 #include "algorithms/BiDijkstra.h"
@@ -17,13 +19,23 @@ typedef std::chrono::high_resolution_clock hrc;
 
 using namespace std;
 
-Manager::Manager(string nodes, string edges, string depots, string clients) {
+const double Manager::VANSPEED = 60000;
+
+Manager::Manager(string &nodes, string &edges, string &depots, string &clients, string &data) {
     GraphReader graphReader(&graph);
     graphReader.readNodes(nodes);
     graphReader.readEdges(edges);
     poi.setGraph(&graph);
     poi.readDepots(depots);
     poi.readClients(clients);
+
+    ifstream inFile;
+    inFile.open(data);
+
+    if(inFile.is_open()){
+        inFile >> maxT;
+        inFile >> maxQ;
+    }
 }
 
 double Manager::getPath(int algorithm, unsigned int &time, vector<Edge *> &path,
@@ -83,7 +95,7 @@ void Manager::getRoutes(vector<vector<vector<Edge *>>> &routes, unsigned int &ti
     for(auto & depot : depots){
         unordered_map<Node*,unordered_map<Node*, vector<Edge*>>> paths = poi.getPaths(depot);
         ClarkeWright clarkeWright(depot, poi.getAssociatedClients(depot),
-                                            poi.getCostFunction(depot), 10000, 100);
+                                            poi.getCostFunction(depot), maxT*VANSPEED, maxQ);
         clarkeWright.run();
         vector<vector<Edge*>> depotRoutes;
         unordered_set<Route*> ans = clarkeWright.getRoutes();

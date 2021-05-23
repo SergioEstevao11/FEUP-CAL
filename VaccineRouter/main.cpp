@@ -3,11 +3,12 @@
 using namespace std;
 
 int main() {
-    std::string nodeS = "../maps/porto_full_nodes_xy.txt";
-    std::string edgeS = "../maps/porto_full_edges.txt";
-    std::string depotsS = "../maps/depots.txt";
-    std::string clientsS = "../maps/clients.txt";
-    Manager manager(nodeS, edgeS, depotsS, clientsS);
+    std::string nodeString = "../maps/porto_full_nodes_xy.txt";
+    std::string edgeString = "../maps/porto_full_edges.txt";
+    std::string depotsString = "../maps/depots.txt";
+    std::string clientsString = "../maps/clients.txt";
+    std::string dataString = "../data.txt";
+    Manager manager(nodeString, edgeString, depotsString, clientsString, dataString);
     MenuInterface menu(&manager);
     menu.mainMenuStart();
 }

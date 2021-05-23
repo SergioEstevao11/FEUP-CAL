@@ -11,7 +11,7 @@
 #include <vector>
 
 #include "../graph/Node.h"
-#include "Route.h"
+#include "../structures/Route.h"
 
 /**
  * @brief Struct that holds the savings gained joining two different orders

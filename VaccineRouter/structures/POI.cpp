@@ -3,9 +3,9 @@
 //
 
 #include "POI.h"
-#include "algorithms/BiDijkstra.h"
-#include "algorithms/AStar.h"
-#include "algorithms/ClarkeWright.h"
+#include "../algorithms/BiDijkstra.h"
+#include "../algorithms/AStar.h"
+#include "../algorithms/ClarkeWright.h"
 
 #include <fstream>
 #include <iostream>

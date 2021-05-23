@@ -4,8 +4,8 @@
 #include <vector>
 #include <unordered_map>
 
-#include "graph/Graph.h"
-#include "algorithms/Dijkstra.h"
+#include "../graph/Graph.h"
+#include "../algorithms/Dijkstra.h"
 
 class POI {
 private:

@@ -1,12 +1,15 @@
 #ifndef VACCINEROUTER_MANAGER_H
 #define VACCINEROUTER_MANAGER_H
 
-#include "POI.h"
+#include "structures/POI.h"
 
 class Manager {
 private:
     POI poi;
     Graph graph;
+    double maxT;
+    double maxQ;
+    static const double VANSPEED;
 public:
     /**
      * @brief Initializes the graph with all the nodes, edges and the points of interest with all the depots and clients
@@ -14,8 +17,9 @@ public:
      * @param edges
      * @param depots
      * @param clients
+     * @param data
      */
-    Manager(std::string nodes, std::string edges, std::string depots, std::string clients);
+    Manager(std::string &nodes, std::string &edges, std::string &depots, std::string &clients, std::string &data);
     /**
      * @brief Retrieves the graph
      * @return graph
