@@ -12,7 +12,6 @@ MenuInterface::MenuInterface(Manager *manager) {
 
 
 void MenuInterface::drawTitle(){
-    system("cls");
     cout <<"===============================================================================" << endl
          << " _   _                _             ______            _                       " << endl
          << "| | | |              (_)            | ___ \\          | |                     " << endl
