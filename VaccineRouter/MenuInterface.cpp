@@ -216,7 +216,9 @@ void MenuInterface::sccDisplay() {
             unordered_map<Node *, Node *> scc;
             unsigned int time;
             manager->getSCC(option, scc,time);
+            manager->sccStatistics(scc);
             cout << "Algorithm ran in: " << time << "ms." << endl;
+
             gd.highlightSCCNodes(scc, source);
             gd.highlightNode(source, GraphViewer::RED);
             gd.display();
@@ -224,6 +226,3 @@ void MenuInterface::sccDisplay() {
         }
     } while(option != 0);
 }
-
-
-

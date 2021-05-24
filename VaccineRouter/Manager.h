@@ -66,6 +66,8 @@ public:
      * @param time
      */
     void getSCC(int algorithm, std::unordered_map<Node*, Node*> &scc, unsigned int &time);
+
+    void sccStatistics(std::unordered_map<Node *, Node *> scc);
 };
 
 

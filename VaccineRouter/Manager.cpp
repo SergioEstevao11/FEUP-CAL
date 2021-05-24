@@ -135,3 +135,38 @@ void Manager::getSCC(int algorithm, std::unordered_map<Node *, Node *> &scc, uns
     }
 }
 
+void Manager::sccStatistics(std::unordered_map<Node *, Node *> scc) { //está mal
+
+    //unordered_map<Node *, int> visited;
+    double avg = 0.0;
+    int max = 0;
+    int res;
+    /*for(auto &n : scc){
+        for (auto &n : scc) {
+            visited[n.first] = false;
+        }
+        res = sccAvg(scc, n.first, visited);
+        avg +=res;
+        if(res > max){
+            max = res;
+        }
+    }*/
+    unordered_map<Node *, unsigned> Count;
+    for(auto &n : scc){
+        if(Count.find(n.second) == Count.end()){
+            Count[n.second] = 1;
+        }
+        else{
+            Count[n.second]++;
+        }
+    }
+    for(auto &n : Count){
+        avg += n.second;
+        if(n.second > max){
+            max = n.second;
+        }
+    }
+    cout << "Total number of SCC: " << scc.size() << endl;
+    cout << "Maximum SCC size: " << max << endl;
+    cout << "Average SCC size: " << avg << endl;
+}
