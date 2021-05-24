@@ -220,8 +220,8 @@ void MenuInterface::sccDisplay() {
             unsigned int time;
             std::vector<Node*> sccNodes;
             sccNodes = manager->getSCC(option, scc,time,source);
-            cout << "Number of nodes of the SCC: " << sccNodes.size() << endl;
             cout << "Algorithm ran in: " << time << "ms." << endl;
+            cout << "Number of nodes of the SCC: " << sccNodes.size() << endl;
 
             gd.highlightSCCNodes(sccNodes);
             gd.highlightNode(source, GraphViewer::RED);
