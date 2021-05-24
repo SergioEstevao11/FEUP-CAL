@@ -109,6 +109,6 @@ std::vector<Edge *> BiDijkstra::getPath(Node *source, Node *dest) {
     return edgePath;
 }
 
-unsigned int BiDijkstra::getExecutionTime() {
+unsigned int BiDijkstra::getExecutionTime() const {
     return executionTime;
 }

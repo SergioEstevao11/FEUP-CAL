@@ -43,7 +43,7 @@ public:
      *
      * @param g Pointer to the graph to be used
      */
-    Kosaraju(Graph * graph);
+    explicit Kosaraju(Graph * graph);
 
     /**
      * @brief Executes the algorithm
@@ -56,14 +56,14 @@ public:
      *
      * @return  The unordered map of node pointers to node pointers
      */
-    std::unordered_map<Node*,Node*> getSCC();
+    std::unordered_map<Node*,Node*> &getSCC();
 
     /**
      * @brief   Retrieves the time it took complete the previous execution of the algorithm
      *
      * @return  Time in milliseconds
      */
-    unsigned int getExecutionTime();
+    unsigned int getExecutionTime() const;
 
 };
 

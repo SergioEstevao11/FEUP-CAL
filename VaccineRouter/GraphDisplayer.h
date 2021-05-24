@@ -18,7 +18,7 @@ public:
      * Initializes the graph viewer with the nodes and edges in graph
      * @param graph
      */
-    GraphDisplayer(Graph * graph);
+    explicit GraphDisplayer(Graph * graph);
     /**
      * Creates a window and displays the graph
      */
@@ -53,9 +53,9 @@ public:
     /**
      * Highlights in the graph viewer the strongly connected components of the node provided as argument
      * @param scc
-     * @param node
+     * @param source
      */
-    void highlightSCCNodes(std::unordered_map<Node *, Node*> &scc, Node * node);
+    void highlightSCCNodes(std::unordered_map<Node *, Node*> &scc, Node * source);
     /**
      * Shows the trace of the algorithm's execution in a animation
      * @param traceForward

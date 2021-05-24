@@ -2,7 +2,6 @@
 
 #include <chrono>
 #include <fstream>
-#include <iostream>
 
 #include "graph/GraphReader.h"
 #include "algorithms/BiDijkstra.h"
@@ -28,9 +27,12 @@ Manager::Manager(string &nodes, string &edges, string &depots, string &clients, 
     ifstream inFile;
     inFile.open(data);
 
+    double maxTime;
+    unsigned int maxQuantity;
+
     if(inFile.is_open()){
-        inFile >> maxT;
-        inFile >> maxQ;
+        inFile >> maxTime;
+        inFile >> maxQuantity;
     }
 }
 

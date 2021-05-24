@@ -76,14 +76,14 @@ public:
      *
      * @return  Unordered set containing all the routes
      */
-    std::unordered_set<Route*> getRoutes(){return finalRoutes;};
+    std::unordered_set<Route*> &getRoutes();
 
     /**
      * @brief    Retrieves the time it took complete the previous execution of the algorithm
      *
      * @return  Time in milliseconds
      */
-    unsigned int getExecutionTime();
+    unsigned int getExecutionTime() const;
 
     /**
      * @brief Clarke Wright destructor

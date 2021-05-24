@@ -58,10 +58,10 @@ void Tarjan::strongComponent(Node *node) {
     }
 }
 
-std::unordered_map<Node *, Node *> Tarjan::getSCC() {
+std::unordered_map<Node *, Node *> &Tarjan::getSCC() {
     return SCC;
 }
 
-unsigned int Tarjan::getExecutionTime() {
+unsigned int Tarjan::getExecutionTime() const {
     return executionTime;
 }

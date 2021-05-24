@@ -6,27 +6,27 @@ private:
     Manager * manager;
     /**
      * Asks for the user's choice when presented with the menu options
-     * @param min mininum number user can choose
+     * @param min minimum number user can choose
      * @param max maximum number user can choose
      * @return choice
      */
-    int readOption(int min, unsigned int max);
+    static int readOption(int min, unsigned int max);
     /**
      * Draws the main logo of the program
      */
-    void drawTitle();
+    static void drawTitle();
     /**
      * Draws the main menu
      */
-    void drawMainMenu();
+    static void drawMainMenu();
     /**
      * Draws the menu which displays the algorithms available to calculate paths
      */
-    void drawPathsAlgorithmsMenu();
+    static void drawPathsAlgorithmsMenu();
     /**
      * Draws the menu which displays the algorithms available to calculate the strongly connected components
      */
-    void drawSCCAlgorithmsMenu();
+    static void drawSCCAlgorithmsMenu();
     void animationDisplay();
     void pathDisplay();
     /**
@@ -45,7 +45,7 @@ private:
      * Draws the menu which displays the algorithms available to calculate paths and asks for the user's choice
      * @return user's choice
      */
-    int pathsMenu();
+    static int pathsMenu();
     /**
      * Asks the user to choose a node
      * @param isSource
@@ -53,7 +53,7 @@ private:
      */
     Node* nodeChoice(bool isSource);
 public:
-    MenuInterface(Manager *manager);
+    explicit MenuInterface(Manager *manager);
     /**
      * Function that controls the program and interaction with the user
      */

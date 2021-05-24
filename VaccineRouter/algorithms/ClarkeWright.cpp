@@ -88,6 +88,10 @@ ClarkeWright::ClarkeWright(Node *depot,
     this->maxQ = maxQ;
 }
 
-unsigned int ClarkeWright::getExecutionTime() {
+unsigned int ClarkeWright::getExecutionTime() const {
     return executionTime;
+}
+
+std::unordered_set<Route *> &ClarkeWright::getRoutes() {
+    return finalRoutes;
 }

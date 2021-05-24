@@ -1,7 +1,5 @@
 #include "MenuInterface.h"
 
-using namespace std;
-
 int main() {
     std::string nodeString = "../maps/porto_full_nodes_xy.txt";
     std::string edgeString = "../maps/porto_full_edges.txt";

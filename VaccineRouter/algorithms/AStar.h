@@ -38,7 +38,7 @@ public:
      *
      * @param g Pointer to the graph to be used
      */
-    AStar(Graph * g);
+    explicit AStar(Graph * g);
 
     /**
      * @brief Executes the algorithm
@@ -64,14 +64,14 @@ public:
      *
      * @return  Vector of edge pointers that represent the requested trace
      */
-    std::vector<Edge*> getTrace();
+    std::vector<Edge*> &getTrace();
 
     /**
      *@brief    Retrieves the time it took complete the previous execution of the algorithm
      *
      * @return  Time in milliseconds
      */
-    unsigned int getExecutionTime();
+    unsigned int getExecutionTime() const;
 };
 
 

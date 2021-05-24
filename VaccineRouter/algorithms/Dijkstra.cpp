@@ -67,6 +67,6 @@ std::vector<Edge *> Dijkstra::getTrace() {
     return trace;
 }
 
-unsigned int Dijkstra::getExecutionTime() {
+unsigned int Dijkstra::getExecutionTime() const {
     return executionTime;
 }

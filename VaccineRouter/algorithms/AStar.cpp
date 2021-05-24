@@ -66,10 +66,10 @@ std::vector<Edge *> AStar::getPath(Node *source, Node *dest) {
     return edgePath;
 }
 
-std::vector<Edge *> AStar::getTrace() {
+std::vector<Edge *> &AStar::getTrace() {
     return trace;
 }
 
-unsigned int AStar::getExecutionTime() {
+unsigned int AStar::getExecutionTime() const {
     return executionTime;
 }

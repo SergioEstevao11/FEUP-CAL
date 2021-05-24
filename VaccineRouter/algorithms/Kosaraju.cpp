@@ -53,10 +53,10 @@ void Kosaraju::DFSAssign(Node * node, Node * component) {
     }
 }
 
-std::unordered_map<Node *, Node *> Kosaraju::getSCC() {
+std::unordered_map<Node *, Node *>& Kosaraju::getSCC() {
     return SCC;
 }
 
-unsigned int Kosaraju::getExecutionTime() {
+unsigned int Kosaraju::getExecutionTime() const {
     return executionTime;
 }

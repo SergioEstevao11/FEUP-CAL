@@ -75,7 +75,7 @@ public:
      *
      * @return  Time in milliseconds
      */
-    unsigned int getExecutionTime();
+    unsigned int getExecutionTime() const;
 };
 
 
