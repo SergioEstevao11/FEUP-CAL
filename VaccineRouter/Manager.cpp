@@ -119,7 +119,8 @@ Graph *Manager::getGraph() {
     return &graph;
 }
 
-void Manager::getSCC(int algorithm, std::unordered_map<Node *, Node *> &scc, unsigned int &time) {
+std::vector<Node*> Manager::getSCC(int algorithm, std::unordered_map<Node *, Node *> &scc, unsigned int &time, Node* source){
+    std::vector<Node*> sccNodes;
     if(algorithm == 1){
         Kosaraju kosaraju(&graph);
         kosaraju.run();
@@ -131,40 +132,12 @@ void Manager::getSCC(int algorithm, std::unordered_map<Node *, Node *> &scc, uns
         time = tarjan.getExecutionTime();
         scc = tarjan.getSCC();
     }
-}
 
-/*void Manager::sccStatistics(std::unordered_map<Node *, Node *> scc) { //está mal
-
-    //unordered_map<Node *, int> visited;
-    double avg = 0.0;
-    int max = 0;
-    int res;
-    /*for(auto &n : scc){
-        for (auto &n : scc) {
-            visited[n.first] = false;
-        }
-        res = sccAvg(scc, n.first, visited);
-        avg +=res;
-        if(res > max){
-            max = res;
-        }
-    }
-    unordered_map<Node *, unsigned> Count;
     for(auto &n : scc){
-        if(Count.find(n.second) == Count.end()){
-            Count[n.second] = 1;
-        }
-        else{
-            Count[n.second]++;
+        if(scc[source] == n.second){
+            sccNodes.push_back(n.first);
         }
     }
-    for(auto &n : Count){
-        avg += n.second;
-        if(n.second > max){
-            max = n.second;
-        }
-    }
-    cout << "Total number of SCC: " << scc.size() << endl;
-    cout << "Maximum SCC size: " << max << endl;
-    cout << "Average SCC size: " << avg << endl;
-}*/
+
+    return sccNodes;
+}

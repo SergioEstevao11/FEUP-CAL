@@ -218,11 +218,12 @@ void MenuInterface::sccDisplay() {
             Node * source = nodeChoice(true);
             unordered_map<Node *, Node *> scc;
             unsigned int time;
-            manager->getSCC(option, scc,time);
-            //manager->sccStatistics(scc);
+            std::vector<Node*> sccNodes;
+            sccNodes = manager->getSCC(option, scc,time,source);
+            cout << "Number of nodes of the SCC: " << sccNodes.size() << endl;
             cout << "Algorithm ran in: " << time << "ms." << endl;
 
-            gd.highlightSCCNodes(scc, source);
+            gd.highlightSCCNodes(sccNodes);
             gd.highlightNode(source, GraphViewer::RED);
             gd.display();
             gd.join();

@@ -2,6 +2,7 @@
 #define VACCINEROUTER_MANAGER_H
 
 #include "structures/POI.h"
+#include <set>
 
 class Manager {
 private:
@@ -64,10 +65,11 @@ public:
      * @param algorithm
      * @param scc
      * @param time
+     * @param source node chosen by the user
+     *
+     * @return vector with the nodes of the SCC which source node is part of
      */
-    void getSCC(int algorithm, std::unordered_map<Node*, Node*> &scc, unsigned int &time);
-
-    void sccStatistics(std::unordered_map<Node *, Node *> scc);
+    std::vector<Node*> getSCC(int algorithm, std::unordered_map<Node*, Node*> &scc, unsigned int &time, Node* source);
 };
 
 

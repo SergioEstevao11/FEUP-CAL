@@ -121,13 +121,11 @@ void GraphDisplayer::join() {
     gv.join();
 }
 
-void GraphDisplayer::highlightSCCNodes(unordered_map<Node *, Node *> &scc, Node *source) {
-    for(auto &comp : scc){
-        if(scc[source] == comp.second){
-            gvNode &node = gv.getNode(comp.first->getId());
-            node.setColor(GraphViewer::RED);
-            node.setSize(10);
-        }
+void GraphDisplayer::highlightSCCNodes(std::vector<Node*> &sccNodes) {
+    for(auto &comp : sccNodes){
+        gvNode &node = gv.getNode(comp->getId());
+        node.setColor(GraphViewer::RED);
+        node.setSize(10);
     }
 }
 

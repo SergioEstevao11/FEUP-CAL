@@ -53,6 +53,10 @@ private:
      */
     Node* nodeChoice(bool isSource);
 public:
+    /** @brief MenuInterface Constructor
+     *
+     * @param manager
+     */
     explicit MenuInterface(Manager *manager);
     /**
      * Function that controls the program and interaction with the user

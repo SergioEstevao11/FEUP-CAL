@@ -52,10 +52,9 @@ public:
     void highlightRoutes(std::vector<std::vector<std::vector<Edge*>>> &routes);
     /**
      * Highlights in the graph viewer the strongly connected components of the node provided as argument
-     * @param scc
-     * @param source
+     * @param sccNodes nodes to be highlighted
      */
-    void highlightSCCNodes(std::unordered_map<Node *, Node*> &scc, Node * source);
+    void highlightSCCNodes(std::vector<Node*> &sccNodes);
     /**
      * Shows the trace of the algorithm's execution in a animation
      * @param traceForward
