@@ -1,14 +1,14 @@
 
-#Projeto de CAL Entrega 2 - Vaccine Router
+# Projeto de CAL Entrega 2 - Vaccine Router
 ### João Afonso, Sérgio Estêvão, Rodrigo Tuna
 
 
-##Descrição
+## Descrição
 Projeto baseado na criação, manipulação e visualização de grafos em ordem a resolver o Multi-Depot Vehicle Routing problem.
 
-##Conteúdos
+## Conteúdos
 
-```cpp
+```
 ~ algorithms/
     AStar.cpp
     AStar.h
@@ -66,3 +66,9 @@ MenuInterface.cpp
 MenuInterface.h
 ```
 
+## Dependências 
+API GraphViewerCpp, fornecido nas aulas práticas para a visualização de grafos.
+Para compilar em windows: mingw64
+
+## Instruções de uso
+No IDE do Clion, abrir o projeto, dar Load ao CMake Project e correr o programa.
