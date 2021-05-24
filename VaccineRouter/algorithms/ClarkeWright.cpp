@@ -5,6 +5,9 @@
 #include "ClarkeWright.h"
 
 #include <algorithm>
+#include <chrono>
+
+typedef std::chrono::high_resolution_clock hrc;
 
 using namespace std;
 
@@ -41,6 +44,7 @@ void ClarkeWright::makeInitialRoutes() {
 }
 
 void ClarkeWright::run() {
+    auto startTime = hrc::now();
     makeInitialRoutes();
     calculateSavings();
     sortSavings();
@@ -63,6 +67,8 @@ void ClarkeWright::run() {
     for(auto & v : routes){
         finalRoutes.insert(v.second);
     }
+    auto finishTime = hrc::now();
+    executionTime = chrono::duration_cast<std::chrono::milliseconds>(finishTime - startTime).count();
 }
 
 ClarkeWright::~ClarkeWright() {
@@ -80,4 +86,8 @@ ClarkeWright::ClarkeWright(Node *depot,
     this->costFunction = costFunction;
     this->maxT = maxT;
     this->maxQ = maxQ;
+}
+
+unsigned int ClarkeWright::getExecutionTime() {
+    return executionTime;
 }

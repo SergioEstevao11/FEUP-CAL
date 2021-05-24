@@ -1,7 +1,3 @@
-//
-// Created by rodrigo on 19/05/2021.
-//
-
 #include "Manager.h"
 
 #include <chrono>
@@ -135,7 +131,7 @@ void Manager::getSCC(int algorithm, std::unordered_map<Node *, Node *> &scc, uns
     }
 }
 
-void Manager::sccStatistics(std::unordered_map<Node *, Node *> scc) { //está mal
+/*void Manager::sccStatistics(std::unordered_map<Node *, Node *> scc) { //está mal
 
     //unordered_map<Node *, int> visited;
     double avg = 0.0;
@@ -150,7 +146,7 @@ void Manager::sccStatistics(std::unordered_map<Node *, Node *> scc) { //está ma
         if(res > max){
             max = res;
         }
-    }*/
+    }
     unordered_map<Node *, unsigned> Count;
     for(auto &n : scc){
         if(Count.find(n.second) == Count.end()){
@@ -169,4 +165,4 @@ void Manager::sccStatistics(std::unordered_map<Node *, Node *> scc) { //está ma
     cout << "Total number of SCC: " << scc.size() << endl;
     cout << "Maximum SCC size: " << max << endl;
     cout << "Average SCC size: " << avg << endl;
-}
+}*/

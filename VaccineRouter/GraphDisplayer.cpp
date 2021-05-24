@@ -1,7 +1,3 @@
-//
-// Created by rodrigo on 13/05/2021.
-//
-
 #include <iostream>
 #include <zconf.h>
 #include "graphviewer.h"
@@ -11,7 +7,7 @@ using namespace std;
 using gvNode = GraphViewer::Node;
 using gvEdge = GraphViewer::Edge;
 
-const unsigned int GraphDisplayer::NUMCOLORS = 6;
+const unsigned int GraphDisplayer::NUMCOLORS = 5;
 
 const sf::Color GraphDisplayer::colors[] = {
         GraphViewer::RED,
