@@ -68,6 +68,7 @@ MenuInterface.h
 
 ## Dependências 
 API GraphViewerCpp, fornecido nas aulas práticas para a visualização de grafos.
+
 Para compilar em windows: mingw64
 
 ## Instruções de uso
