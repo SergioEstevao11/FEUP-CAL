@@ -27,12 +27,10 @@ Manager::Manager(string &nodes, string &edges, string &depots, string &clients, 
     ifstream inFile;
     inFile.open(data);
 
-    double maxTime;
-    unsigned int maxQuantity;
 
     if(inFile.is_open()){
-        inFile >> maxTime;
-        inFile >> maxQuantity;
+        inFile >> maxT;
+        inFile >> maxQ;
     }
 }
 

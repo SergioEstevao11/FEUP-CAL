@@ -102,7 +102,7 @@ void GraphDisplayer::pathAnimation(std::vector<Edge*> &path){
     for(auto &e : path){
         gvEdge &edge = gv.getEdge(graph->getEdgeId(e));
         edge.setColor(GraphViewer::BLUE);
-        edge.setThickness(5);
+        edge.setThickness(10);
         usleep(20000);
     }
 }

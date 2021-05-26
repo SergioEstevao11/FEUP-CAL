@@ -6,6 +6,7 @@
 
 #include <queue>
 #include <chrono>
+#include <algorithm>
 
 typedef std::chrono::high_resolution_clock hrc;
 
@@ -102,6 +103,7 @@ std::vector<Edge *> BiDijkstra::getPath(Node *source, Node *dest) {
         it = pathf[it]->getBegin();
     }
     it = midPoint;
+    reverse(edgePath.begin(), edgePath.end());
     while(pathb[it] != nullptr){
         edgePath.push_back(pathb[it]);
         it = pathb[it]->getEnd();
